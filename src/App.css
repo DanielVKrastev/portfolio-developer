@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+    --color-green-smoke-50: #f7f7ee;
+    --color-green-smoke-100: #d9dbbb;
+    --color-green-smoke-200: #d9dbbb;
+    --color-green-smoke-300: #d9dbbb;
+    --color-green-smoke-400: #a8ad6e;
+    --color-green-smoke-500: #969d57;
+    --color-green-smoke-600: #6d733d;
+    --color-green-smoke-700: #545932;
+    --color-green-smoke-800: #44482c;
+    --color-green-smoke-900: #3b3f28;
+    --color-green-smoke-950: #1e2112;
+}
