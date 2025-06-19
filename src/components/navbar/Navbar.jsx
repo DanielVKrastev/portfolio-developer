@@ -85,7 +85,7 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="#skills"
                                     className={liClassesNoActive}
                                 >
                                     Skills
@@ -93,7 +93,7 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="#projects"
                                     className={liClassesNoActive}
                                 >
                                     Projects

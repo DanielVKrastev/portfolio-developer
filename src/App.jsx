@@ -2,6 +2,7 @@ import './App.css'
 import About from './components/about/About'
 import Headings from './components/headings/Headings'
 import Navbar from './components/navbar/Navbar'
+import Projects from './components/projects/Projects'
 
 function App() {
 
@@ -12,6 +13,8 @@ function App() {
       <Headings />
 
       <About />
+
+      <Projects />
       <div className='mb-1000'>
 
       </div>
