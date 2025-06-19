@@ -14,9 +14,9 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled ? 'bg-white shadow-md' : 'border-b border-gray-500 bg-transparent'}`;
-    const liClassesActive = `block py-2 px-3 md:p-0 text-white bg-blue-700 rounded-sm md:bg-transparent ${scrolled ? 'md:text-green-smoke-700' : 'bg-white'} `;
-    const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-green-smoke-700' : 'text-gray-400 md:hover:text-white'} `;
+    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled ? 'bg-default-50 shadow-md' : 'border-b border-gray-500 bg-transparent'}`;
+    const liClassesActive = `block py-2 px-3 md:p-0 text-white bg-blue-700 rounded-sm md:bg-transparent ${scrolled ? 'md:text-default-700' : 'bg-white'} `;
+    const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-default-700' : 'text-gray-400 md:hover:text-white'} `;
     return (
         <>
             <nav className={navClasses}>
@@ -25,14 +25,14 @@ export default function Navbar() {
                         href="https://flowbite.com/"
                         className="flex items-center space-x-3 rtl:space-x-reverse"
                     >
-                        <span className={`self-center text-2xl font-semibold whitespace-nowrap ${scrolled ? 'text-green-smoke-600' : 'text-white'}`}>
+                        <span className={`self-center text-2xl font-semibold whitespace-nowrap ${scrolled ? 'text-default-600' : 'text-white'}`}>
                             DanielKrastev.
                         </span>
                     </a>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         <button
                             type="button"
-                            className="text-white bg-green-smoke-600 hover:bg-green-smoke-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                            className="text-white bg-default-600 hover:bg-default-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
                         >
                             Contacts
                         </button>

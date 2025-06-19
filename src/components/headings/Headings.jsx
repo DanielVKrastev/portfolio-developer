@@ -5,21 +5,24 @@ export default function Headings() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
           {/* Text Section */}
           <div>
-            <h1 className="mb-6 text-5xl font-extrabold italic tracking-tight leading-tight text-white md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 text-5xl font-extrabold italic tracking-tight leading-tight text-default-50 md:text-6xl lg:text-7xl">
               Daniel Krastev
             </h1>
-            <h2 className="mb-6 text-4xl font-extrabold italic tracking-tight leading-tight text-white md:text-4xl lg:text-4xl">
+            <h2 className="mb-6 text-4xl font-extrabold italic tracking-tight leading-tight text-default-50 md:text-4xl lg:text-4xl">
               Web Developer
             </h2>
             <p className="mb-8 text-lg font-light italic text-gray-200 md:text-xl lg:px-0">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro corrupti dolorum praesentium officiis vel ad rem soluta voluptates.
+            </p>
+            <p className="mb-8 text-lg font-light italic text-gray-200 md:text-xl lg:px-0">
+              Tech Stack
             </p>
             
         {/* Buttons */}
         <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
           <a
             href="#projects"
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-green-smoke-600 hover:bg-green-smoke-800 rounded-lg shadow-lg transition"
+            className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
           >
             Projects
             <svg
@@ -35,7 +38,7 @@ export default function Headings() {
           </a>
           <a
             href="#about"
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white border border-white hover:bg-white hover:text-green-smoke-800 rounded-lg transition"
+            className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white border border-white hover:bg-white hover:text-default-800 rounded-lg transition"
           >
             About
           </a>
@@ -45,7 +48,7 @@ export default function Headings() {
           {/* Image Section */}
           <div className="flex justify-center sm:justify-end">
             <img
-              className="rounded-full shadow-2xl w-92 h-92 md:w-150 md:h-150 object-cover border-4 border-green-smoke-500"
+              className="rounded-full shadow-2xl w-92 h-92 md:w-150 md:h-150 object-cover border-4 border-default-500"
               src="/images/daniel-portfolio-image.jpg"
               alt="Daniel Krastev"
             />
