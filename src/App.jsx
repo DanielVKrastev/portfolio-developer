@@ -1,5 +1,6 @@
 import './App.css'
 import About from './components/about/About'
+import Contact from './components/contact/Contact'
 import Headings from './components/headings/Headings'
 import Navbar from './components/navbar/Navbar'
 import Projects from './components/projects/Projects'
@@ -15,11 +16,8 @@ function App() {
       <About />
 
       <Projects />
-      <div className='mb-1000'>
 
-      </div>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro corrupti dolorum praesentium officiis vel ad rem soluta voluptates, accusamus eius vitae repellendus provident nihil amet unde voluptatibus sunt cum odit?
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro corrupti dolorum praesentium officiis vel ad rem soluta voluptates, accusamus eius vitae repellendus provident nihil amet unde voluptatibus sunt cum odit?
+      <Contact />
     </>
   )
 }
