@@ -1,4 +1,5 @@
 import './App.css'
+import About from './components/about/About'
 import Headings from './components/headings/Headings'
 import Navbar from './components/navbar/Navbar'
 
@@ -9,6 +10,8 @@ function App() {
       <Navbar />
 
       <Headings />
+
+      <About />
       <div className='mb-1000'>
 
       </div>

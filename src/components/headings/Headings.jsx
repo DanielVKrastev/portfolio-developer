@@ -1,3 +1,5 @@
+import { ArrowBigRightDash, ArrowLeft, ArrowRight, ArrowRightCircle } from "lucide-react";
+
 export default function Headings() {
   return (
     <section className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
@@ -70,16 +72,7 @@ export default function Headings() {
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
               >
                 Projects
-                <svg
-                  className="w-4 h-4 ms-2 rtl:rotate-180"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 14 10"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M1 5h12m0 0L9 1m4 4L9 9" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ArrowRightCircle className="w-6 ml-2"/>
               </a>
               <a
                 href="#about"

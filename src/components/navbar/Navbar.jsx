@@ -77,7 +77,7 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="#about"
                                     className={liClassesNoActive}
                                 >
                                     About
