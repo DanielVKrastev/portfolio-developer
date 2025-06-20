@@ -4,6 +4,7 @@ import Contact from './components/contact/Contact'
 import Headings from './components/headings/Headings'
 import Navbar from './components/navbar/Navbar'
 import Projects from './components/projects/Projects'
+import Skills from './components/skills/Skills'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
       <Headings />
 
       <About />
+
+      <Skills />
 
       <Projects />
 

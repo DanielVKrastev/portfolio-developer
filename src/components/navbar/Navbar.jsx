@@ -14,7 +14,7 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled ? 'bg-default-50 shadow-md' : 'border-b border-gray-500 bg-transparent'}`;
+    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled ? 'bg-gray-50/98 shadow-md' : 'border-b border-gray-500 bg-transparent'}`;
     const liClassesActive = `block py-2 px-3 md:p-0 text-white bg-blue-700 rounded-sm md:bg-transparent ${scrolled ? 'md:text-default-700' : 'bg-white'} `;
     const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-default-700' : 'text-gray-400 md:hover:text-white'} `;
     return (
