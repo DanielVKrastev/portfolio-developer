@@ -3,7 +3,7 @@ import ProjectCard from "./project-card/ProjectCard";
 export default function Projects() {
     return (
         <>
-            <section id="projects" className="bg-white py-20">
+            <section id="projects" className="bg-gray-50 py-20">
                 <div className="max-w-5xl mx-auto text-center mb-12 px-4">
                     <h2 className="text-4xl font-bold text-gray-800 mb-3">Projects</h2>
                     <hr className="w-10 mx-auto border-t-4 rounded-2xl border-default-600" />
