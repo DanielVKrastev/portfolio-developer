@@ -17,15 +17,15 @@ function App() {
 
       <About />
 
-      <ScrollReveal>
+      <ScrollReveal once offset="0px 0px -20% 0px">
         <Skills />
       </ScrollReveal>
 
-      <ScrollReveal>
+      <ScrollReveal once offset="0px 0px -20% 0px">
         <Projects />
       </ScrollReveal>
 
-      <ScrollReveal>
+      <ScrollReveal once offset="0px 0px -20% 0px">
         <Contact />
       </ScrollReveal>
     </>

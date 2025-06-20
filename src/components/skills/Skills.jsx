@@ -51,8 +51,8 @@ export default function Skills() {
     ];
     return (
         <>
-            <section id="skills" className="bg-white py-16 px-4">
-                <div className="max-w-7xl mx-auto">
+            <section id="skills" className="bg-white py-20 px-4">
+                <div className="max-w-5xl mx-auto text-center mb-12 px-4">
                     <h2 className="text-4xl font-bold text-gray-800 mb-3 text-center">Skills & Certificates</h2>
                     <hr className="w-10 mx-auto border-t-4 rounded-2xl border-default-600 mb-10" />
 
