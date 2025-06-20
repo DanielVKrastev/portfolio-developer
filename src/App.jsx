@@ -4,6 +4,7 @@ import Contact from './components/contact/Contact'
 import Headings from './components/headings/Headings'
 import Navbar from './components/navbar/Navbar'
 import Projects from './components/projects/Projects'
+import { ScrollReveal } from './components/scroll-reveal/ScrollReveal'
 import Skills from './components/skills/Skills'
 
 function App() {
@@ -16,11 +17,17 @@ function App() {
 
       <About />
 
-      <Skills />
+      <ScrollReveal>
+        <Skills />
+      </ScrollReveal>
 
-      <Projects />
+      <ScrollReveal>
+        <Projects />
+      </ScrollReveal>
 
-      <Contact />
+      <ScrollReveal>
+        <Contact />
+      </ScrollReveal>
     </>
   )
 }

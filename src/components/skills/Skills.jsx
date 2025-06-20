@@ -1,3 +1,5 @@
+import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
+
 export default function Skills() {
     const certificates = [
         {
@@ -61,6 +63,7 @@ export default function Skills() {
                             <h3 className="text-2xl font-semibold text-gray-700 mb-6">Tech Stack</h3>
 
                             {techStack.map((skill) => (
+                                <ScrollReveal>
                                 <div key={skill.name} className="mb-6">
                                     <div className="flex justify-between mb-1">
                                         <span className="text-base font-medium text-gray-700">{skill.name}</span>
@@ -74,6 +77,7 @@ export default function Skills() {
                                     </div>
 
                                 </div>
+                                </ScrollReveal>
                             ))}
                         </div>
 
@@ -83,6 +87,7 @@ export default function Skills() {
 
                             <ul className="space-y-4">
                                 {certificates.map((cert) => (
+                                    <ScrollReveal>
                                     <li
                                         key={cert.title}
                                         className="bg-gray-100 hover:bg-gray-200 transition p-4 rounded-xl shadow-sm"
@@ -92,6 +97,7 @@ export default function Skills() {
                                             <p className="text-sm text-gray-600">{cert.issuer}</p>
                                         </a>
                                     </li>
+                                    </ScrollReveal>
                                 ))}
                             </ul>
                         </div>
