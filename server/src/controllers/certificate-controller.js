@@ -3,9 +3,9 @@ import certificateService from "../services/certificate-service.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
 import mongoose from "mongoose";
 
-const certificate = Router();
+const certificateController = Router();
 
-certificate.get('/', async (req, res) => {
+certificateController.get('/', async (req, res) => {
     try{
         let data;
         if (req.query.limit) {
@@ -21,7 +21,7 @@ certificate.get('/', async (req, res) => {
     }
 });
 
-certificate.get('/:aboutId', async (req, res) => {
+certificateController.get('/:contactId', async (req, res) => {
     const certificateId = req.params.certificateId;
 
     if (!mongoose.Types.ObjectId.isValid(certificateId)) {
@@ -35,7 +35,7 @@ certificate.get('/:aboutId', async (req, res) => {
     }
 });
 
-certificate.post('/', async (req, res) => {
+certificateController.post('/', async (req, res) => {
     try {
         const data = req.body;
 
@@ -47,7 +47,7 @@ certificate.post('/', async (req, res) => {
     }
 });
 
-certificate.patch('/:aboutId', async (req, res) => {
+certificateController.patch('/:contactId', async (req, res) => {
     const certificateId = req.params.certificateId;
     const updateData = req.body;
 
@@ -67,7 +67,7 @@ certificate.patch('/:aboutId', async (req, res) => {
     }
 });
 
-certificate.delete('/:aboutId', async (req, res) => {
+certificateController.delete('/:contactId', async (req, res) => {
     const certificateId = req.params.certificateId;
     try {
         await certificateService.delete(certificateId);
@@ -77,4 +77,4 @@ certificate.delete('/:aboutId', async (req, res) => {
     }
 });
 
-export default certificate;
+export default certificateController;
