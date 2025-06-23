@@ -3,9 +3,9 @@ import techStackService from "../services/tech-stack-service.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
 import mongoose from "mongoose";
 
-const techStack = Router();
+const techStackController = Router();
 
-techStack.get('/', async (req, res) => {
+techStackController.get('/', async (req, res) => {
     try{
         let data;
         if (req.query.limit) {
@@ -21,7 +21,7 @@ techStack.get('/', async (req, res) => {
     }
 });
 
-techStack.get('/:techStackId', async (req, res) => {
+techStackController.get('/:techStackId', async (req, res) => {
     const techStackId = req.params.techStackId;
 
     if (!mongoose.Types.ObjectId.isValid(techStackId)) {
@@ -35,7 +35,7 @@ techStack.get('/:techStackId', async (req, res) => {
     }
 });
 
-techStack.post('/', async (req, res) => {
+techStackController.post('/', async (req, res) => {
     try {
         const data = req.body;
 
@@ -47,7 +47,7 @@ techStack.post('/', async (req, res) => {
     }
 });
 
-techStack.patch('/:techStackId', async (req, res) => {
+techStackController.patch('/:techStackId', async (req, res) => {
     const techStackId = req.params.techStackId;
     const updateData = req.body;
 
@@ -67,7 +67,7 @@ techStack.patch('/:techStackId', async (req, res) => {
     }
 });
 
-techStack.delete('/:techStackId', async (req, res) => {
+techStackController.delete('/:techStackId', async (req, res) => {
     const techStackId = req.params.techStackId;
     try {
         await techStackService.delete(techStackId);
@@ -77,4 +77,4 @@ techStack.delete('/:techStackId', async (req, res) => {
     }
 });
 
-export default techStack;
+export default techStackController;
