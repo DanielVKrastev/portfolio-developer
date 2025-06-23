@@ -1,5 +1,5 @@
 import { Router } from "express";
-import certificateService from "../services/certificate-service.js";
+import aboutService from "../services/about-service.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
 import mongoose from "mongoose";
 
@@ -10,9 +10,9 @@ certificate.get('/', async (req, res) => {
         let data;
         if (req.query.limit) {
             const limit = parseInt(req.query.limit);
-            data = await certificateService.getAllLimit(limit);
+            data = await aboutService.getAllLimit(limit);
         } else{
-            data = await certificateService.getAll();
+            data = await aboutService.getAll();
         }
 
         res.status(200).json(data);
@@ -22,13 +22,13 @@ certificate.get('/', async (req, res) => {
 });
 
 certificate.get('/:aboutId', async (req, res) => {
-    const certificateId = req.params.certificateId;
+    const aboutId = req.params.aboutId;
 
-    if (!mongoose.Types.ObjectId.isValid(certificateId)) {
-        return res.status(400).json({ error: 'Invalid Certificate ID' });
+    if (!mongoose.Types.ObjectId.isValid(aboutId)) {
+        return res.status(400).json({ error: 'Invalid About ID' });
     }
     try {
-        const data = await certificateService.getOne(certificateId);
+        const data = await aboutService.getOne(aboutId);
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ error });
@@ -39,7 +39,7 @@ certificate.post('/', async (req, res) => {
     try {
         const data = req.body;
 
-        const createdData = await certificateService.create(data);
+        const createdData = await aboutService.create(data);
         res.status(201).json(createdData);
     } catch(error) {
         const errMessage = getErrorMessage(error);
@@ -48,17 +48,17 @@ certificate.post('/', async (req, res) => {
 });
 
 certificate.patch('/:aboutId', async (req, res) => {
-    const certificateId = req.params.certificateId;
+    const aboutId = req.params.aboutId;
     const updateData = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(certificateId)) {
-        return res.status(400).json({ error: 'Invalid Certificate ID' });
+    if (!mongoose.Types.ObjectId.isValid(aboutId)) {
+        return res.status(400).json({ error: 'Invalid About ID' });
     }
 
     try {
-        const updatedData = await certificateService.update(certificateId, updateData);
+        const updatedData = await aboutService.update(aboutId, updateData);
         if (!updatedData) {
-            return res.status(404).json({ error: 'Certificate not found' });
+            return res.status(404).json({ error: 'About not found' });
         }
         res.status(200).json(updatedData);
     } catch (error) {
@@ -68,9 +68,9 @@ certificate.patch('/:aboutId', async (req, res) => {
 });
 
 certificate.delete('/:aboutId', async (req, res) => {
-    const certificateId = req.params.certificateId;
+    const aboutId = req.params.aboutId;
     try {
-        await certificateService.delete(certificateId);
+        await aboutService.delete(aboutId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );
