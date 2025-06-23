@@ -2,6 +2,7 @@ import express from 'express';
 import { MONGODB_URI_LOCAL, MONGODB_URI_ONLINE } from '../constants.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import routes from './routes.js';
 
 const app = express();
 
@@ -29,8 +30,8 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.urlencoded( { extended: false } ));
-
 //route
+app.use(routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is lestening on port ${port} ...`));
