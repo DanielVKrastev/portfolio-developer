@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
 import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
+import skillsApi from "../../api/skillsApi";
 
 export default function Skills() {
+    const [techStack, setTechStack] = useState([]);
+
+    useEffect(() => {
+        async function getData() {
+            const data = await skillsApi.getAll();
+            setTechStack(data);
+        }
+
+        getData();
+    }, []);
+
+    console.log(techStack);
+    
     const certificates = [
         {
             title: "TypeScript - May 2025",
@@ -39,7 +54,7 @@ export default function Skills() {
         },
     ];
 
-    const techStack = [
+    /*const techStack = [
         { name: "HTML / CSS", level: 85 },
         { name: "JavaScript", level: 80 },
         { name: "TypeScript", level: 65 },
@@ -48,7 +63,7 @@ export default function Skills() {
         { name: "Node.js / Express", level: 70 },
         { name: "PHP", level: 70 },
         { name: "MySQL", level: 85 },
-    ];
+    ];*/
     return (
         <>
             <section id="skills" className="bg-white py-20 px-4">
