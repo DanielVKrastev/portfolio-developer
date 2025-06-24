@@ -7,18 +7,6 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 
 const authController = Router();
 
-authController.post('/register', async (req, res) => {
-    const userData = req.body;
-
-    try {
-        const createdUser = await authService.register(userData);
-        res.status(201).json(createdUser);
-    } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        return res.status(400).json({ error: errorMessage });
-    }
-});
-
 authController.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
