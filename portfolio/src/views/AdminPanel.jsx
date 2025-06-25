@@ -4,6 +4,7 @@ import Sidebar from "../components/admin/sidebar/Sidebar";
 import ProjectsTable from "../components/admin/projects-table/ProjectsTable";
 import SkillsTable from "../components/admin/skills/skillsTable";
 import CertificatesTable from "../components/admin/certificates/CertificatesTable";
+import ContactsTable from "../components/admin/contacts/ContactsTable";
 
 export default function AdminPanel() {
 
@@ -17,7 +18,7 @@ export default function AdminPanel() {
           <Route path="/projects" element={<ProjectsTable />} />
           <Route path="/skills" element={<SkillsTable />} />
           <Route path="/certificates" element={<CertificatesTable />} />
-          <Route path="/contacts" element={<CertificatesTable />} />
+          <Route path="/contacts" element={<ContactsTable />} />
         </Routes>
       </main>
     </div>

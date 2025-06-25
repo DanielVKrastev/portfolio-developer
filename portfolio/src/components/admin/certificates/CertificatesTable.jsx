@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { Plus, Pencil, Trash, X } from "lucide-react";
 
-// Reusable CRUD table for managing certificates
-// Fields: name, issuedBy, certificateUrl
-// Swap in-memory state with API fetch/save as needed
-
 export default function CertificatesTable() {
   const [modalOpen, setModalOpen] = useState(false);
   const [current, setCurrent] = useState(null); // null → add, object → edit
@@ -25,7 +21,6 @@ export default function CertificatesTable() {
     },
   ]);
 
-  // ─── Modal helpers ─────────────────────────────────────────────────────────
   const openAdd = () => {
     setCurrent(null);
     setForm(initialForm);
@@ -40,7 +35,6 @@ export default function CertificatesTable() {
 
   const closeModal = () => setModalOpen(false);
 
-  // ─── Form handlers ─────────────────────────────────────────────────────────
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -62,12 +56,11 @@ export default function CertificatesTable() {
   };
 
   const deleteCertificate = (id) => {
-    if (confirm("Сигурни ли сте, че искате да изтриете сертификата?")) {
+    if (confirm("Are you sure you want to delete the certificate?")) {
       setCertificates((prev) => prev.filter((c) => c.id !== id));
     }
   };
 
-  // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <section id="certificates" className="mx-auto max-w-4xl">
       <div className="mb-6 flex items-center justify-between">
