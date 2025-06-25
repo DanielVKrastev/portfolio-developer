@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import { Link } from "react-router";
 
 const menuItems = [
-  { name: "Dashboard", href: "#" },
-  { name: "Projects", href: "#" },
+  { name: "Dashboard", href: "/admin/" },
+  { name: "Projects", href: "/admin/projects" },
   { name: "Contacts", href: "#" },
   { name: "Settings", href: "#" },
 ];
@@ -31,13 +32,13 @@ export default function Sidebar() {
         <div className="border-b border-gray-700 p-6 text-2xl font-bold">⚙️ Admin</div>
         <nav className="mt-6 space-y-1">
           {menuItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className="block px-6 py-3 hover:bg-gray-700"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
       </aside>
