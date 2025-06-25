@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Dashboard from "../components/admin/dashboard/Dashboard";
 import Sidebar from "../components/admin/sidebar/Sidebar";
 import ProjectsTable from "../components/admin/projects-table/ProjectsTable";
+import SkillsTable from "../components/admin/skills/skillsTable";
 
 export default function AdminPanel() {
 
@@ -13,6 +14,7 @@ export default function AdminPanel() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/projects" element={<ProjectsTable />} />
+          <Route path="/skills" element={<SkillsTable />} />
         </Routes>
       </main>
     </div>

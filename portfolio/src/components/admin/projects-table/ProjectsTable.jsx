@@ -148,7 +148,7 @@ export default function ProjectsTable() {
                     <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
                         <div className="mb-4 flex items-center justify-between border-b pb-2 dark:border-gray-700">
                             <h2 className="text-xl font-semibold">
-                                {current ? "Редактирай проект" : "Нов проект"}
+                                {current ? "Update Project" : "New Project"}
                             </h2>
                             <button
                                 onClick={closeModal}
@@ -160,7 +160,7 @@ export default function ProjectsTable() {
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Име</label>
+                                <label className="mb-1 block text-sm font-medium">Name</label>
                                 <input
                                     name="name"
                                     value={form.name}
@@ -170,7 +170,7 @@ export default function ProjectsTable() {
                                 />
                             </div>
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Описание</label>
+                                <label className="mb-1 block text-sm font-medium">Description</label>
                                 <textarea
                                     name="description"
                                     value={form.description}
@@ -212,7 +212,7 @@ export default function ProjectsTable() {
                                     onClick={closeModal}
                                     className="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
                                 >
-                                    Отказ
+                                    Cancel
                                 </button>
                                 <button
                                     type="submit"
