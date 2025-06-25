@@ -87,7 +87,6 @@ export default function ContactsTable() {
                                 <td className="px-4 py-3 text-sm whitespace-nowrap">
                                     <a
                                         href={`mailto:${c.email}?subject=Fw:${c.subject}`}
-                                        target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-blue-600 hover:underline"
                                     >
