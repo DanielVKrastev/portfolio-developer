@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router'
 import './App.css'
 import Home from './views/Home'
-import AdminDashboard from './views/AdminDashboard'
+import AdminPanel from './views/AdminPanel'
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/admin" element={<AdminDashboard />}/>
+      <Route path="/admin/*" element={<AdminPanel />}/>
     </Routes>
     </>
   )
