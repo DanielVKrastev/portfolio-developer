@@ -3,7 +3,6 @@ import { Menu, Plus, Pencil, Trash, X } from "lucide-react";
 
 export default function ProjectsTable() {
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [current, setCurrent] = useState(null); // null → add, object → edit
     const initialForm = {
@@ -74,13 +73,6 @@ export default function ProjectsTable() {
 
     return (
         <>
-            {/* Mobile Hamburger */}
-            <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="fixed left-4 top-4 z-50 rounded p-2 text-white shadow md:hidden bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-            >
-                <Menu className="h-6 w-6" />
-            </button>
             <section id="projects" className="max-w-5xl mx-auto">
                 <div className="mb-6 flex items-center justify-between">
                     <h1 className="text-3xl font-bold">Projects</h1>

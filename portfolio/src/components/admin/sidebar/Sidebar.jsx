@@ -38,6 +38,7 @@ export default function Sidebar() {
               key={item.name}
               to={item.href}
               className="block px-6 py-3 hover:bg-gray-700"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {item.name}
             </Link>
