@@ -3,10 +3,12 @@ import { Menu } from "lucide-react";
 import { Link } from "react-router";
 
 const menuItems = [
-  { name: "Dashboard", href: "/admin/" },
-  { name: "Projects", href: "/admin/projects" },
-  { name: "Contacts", href: "#" },
-  { name: "Settings", href: "#" },
+  { name: "🏠Dashboard", href: "/admin/" },
+  { name: "🗂️Projects", href: "/admin/projects" },
+  { name: "🧠Skills", href: "/admin/skills" },
+  { name: "🏅Certificates", href: "/admin/certificates" },
+  { name: "💬Contacts", href: "/admin/contacts" },
+  { name: "🚪Logout", href: "#" },
 ];
 
 export default function Sidebar() {
