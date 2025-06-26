@@ -41,7 +41,7 @@ export default function ModalCertificate(
                         <label className="mb-1 block text-sm font-medium">Name</label>
                         <input
                             name="name"
-                            value={form.name}
+                            defaultValue={form.name}
                             onChange={handleChange}
                             required
                             className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
@@ -51,7 +51,7 @@ export default function ModalCertificate(
                         <label className="mb-1 block text-sm font-medium">Issued By</label>
                         <input
                             name="issuedBy"
-                            value={form.issuedBy}
+                            defaultValue={form.issuedBy}
                             onChange={handleChange}
                             required
                             className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
@@ -61,7 +61,7 @@ export default function ModalCertificate(
                         <label className="mb-1 block text-sm font-medium">Certificate URL</label>
                         <input
                             name="certificateUrl"
-                            value={form.certificateUrl}
+                            defaultValue={form.certificateUrl}
                             onChange={handleChange}
                             className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
                         />
