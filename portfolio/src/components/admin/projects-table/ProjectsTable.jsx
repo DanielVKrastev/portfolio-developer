@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Plus, Pencil, Trash, X } from "lucide-react";
+import projectsApi from "../../../api/projectsApi";
+import { ModalProject } from "./modal-project/ModalProject";
 
 export default function ProjectsTable() {
 
@@ -15,16 +17,16 @@ export default function ProjectsTable() {
     const [form, setForm] = useState(initialForm);
 
     // Dummy starter data (replace with API fetch)
-    const [projects, setProjects] = useState([
-        {
-            id: 1,
-            name: "Personal Portfolio",
-            description: "Site portfopli description",
-            techStack: "React, Tailwind, Vite",
-            imageUrl: "https://via.placeholder.com/120x80.png?text=Thumb",
-            projectUrl: "https://example.com",
-        },
-    ]);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        async function getAllSkills() {
+            const data = await projectsApi.getAll();
+            setProjects(data);
+        }
+
+        getAllSkills();
+    }, []);
 
     const openAdd = () => {
         setCurrent(null);
@@ -47,26 +49,29 @@ export default function ProjectsTable() {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (current) {
             // edit
+            await projectsApi.update(current._id, form);
             setProjects((prev) =>
-                prev.map((p) => (p.id === current.id ? { ...current, ...form } : p))
+                prev.map((p) => (p._id === current._id ? { ...current, ...form } : p))
             );
         } else {
             // add
+            const data = await projectsApi.create(form);
             setProjects((prev) => [
                 ...prev,
-                { id: Date.now(), ...form },
+                { _id: data._id, ...form },
             ]);
         }
         closeModal();
     };
 
-    const deleteProject = (id) => {
+    const deleteProject = async (id) => {
         if (confirm("Are you sure you want to delete the project?")) {
-            setProjects((prev) => prev.filter((p) => p.id !== id));
+             await projectsApi.delete(id);
+            setProjects((prev) => prev.filter((p) => p._id !== id));
         }
     };
 
@@ -98,7 +103,7 @@ export default function ProjectsTable() {
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-800 dark:bg-gray-900">
                             {projects.map((p, idx) => (
-                                <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                <tr key={p._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                                     <td className="px-4 py-3 whitespace-nowrap text-sm">{idx + 1}</td>
                                     <td className="px-4 py-3 whitespace-nowrap text-sm font-medium">{p.name}</td>
                                     <td className="px-4 py-3 text-sm max-w-xs truncate">{p.description}</td>
@@ -118,7 +123,7 @@ export default function ProjectsTable() {
                                                 <Pencil className="h-4 w-4" />
                                             </button>
                                             <button
-                                                onClick={() => deleteProject(p.id)}
+                                                onClick={() => deleteProject(p._id)}
                                                 className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                                                 aria-label="Delete"
                                             >
@@ -135,88 +140,13 @@ export default function ProjectsTable() {
 
             { /* TODO: Create NEW component for modal */}
             {/* Modal Overlay */}
-            {modalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 py-6">
-                    <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
-                        <div className="mb-4 flex items-center justify-between border-b pb-2 dark:border-gray-700">
-                            <h2 className="text-xl font-semibold">
-                                {current ? "Update Project" : "New Project"}
-                            </h2>
-                            <button
-                                onClick={closeModal}
-                                className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                            >
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Name</label>
-                                <input
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Description</label>
-                                <textarea
-                                    name="description"
-                                    value={form.description}
-                                    onChange={handleChange}
-                                    rows={3}
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Tech Stack</label>
-                                <input
-                                    name="techStack"
-                                    value={form.techStack}
-                                    onChange={handleChange}
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Image URL</label>
-                                <input
-                                    name="imageUrl"
-                                    value={form.imageUrl}
-                                    onChange={handleChange}
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Project URL</label>
-                                <input
-                                    name="projectUrl"
-                                    value={form.projectUrl}
-                                    onChange={handleChange}
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div className="flex justify-end gap-2 pt-4">
-                                <button
-                                    type="button"
-                                    onClick={closeModal}
-                                    className="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                >
-                                    {current ? "Запази" : "Добави"}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
+            {modalOpen && <ModalProject
+                id={form?._id}
+                current={current}
+                closeModal={closeModal}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />}
         </>
     );
 }
