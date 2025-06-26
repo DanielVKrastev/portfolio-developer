@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash, X } from "lucide-react";
+import certificatesApi from "../../../api/certificatesApi";
+import ModalCertificate from "./modal-certificate/ModalCertificate";
 
 export default function CertificatesTable() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -12,14 +14,16 @@ export default function CertificatesTable() {
   };
 
   const [form, setForm] = useState(initialForm);
-  const [certificates, setCertificates] = useState([
-    {
-      id: 1,
-      name: "React Fundamentals",
-      issuedBy: "Meta",
-      certificateUrl: "https://example.com/react-cert.pdf",
-    },
-  ]);
+  const [certificates, setCertificates] = useState([]);
+
+  useEffect(() => {
+    async function getAllFetching() {
+      const data = await certificatesApi.getAll();
+      setCertificates(data);
+    }
+
+    getAllFetching();
+  }, []);
 
   const openAdd = () => {
     setCurrent(null);
@@ -40,24 +44,30 @@ export default function CertificatesTable() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (current) {
+      //update
+      await certificatesApi.update(current._id, form);
       setCertificates((prev) =>
-        prev.map((c) => (c.id === current.id ? { ...current, ...form } : c))
+        prev.map((c) => (c._id === current._id ? { ...current, ...form } : c))
       );
     } else {
+      // add
+      const data = await certificatesApi.create(form);
       setCertificates((prev) => [
         ...prev,
-        { id: Date.now(), ...form },
+        { _id: data._id, ...form },
       ]);
     }
     closeModal();
   };
 
-  const deleteCertificate = (id) => {
+  const deleteCertificate = async (id) => {
     if (confirm("Are you sure you want to delete the certificate?")) {
-      setCertificates((prev) => prev.filter((c) => c.id !== id));
+      // delete
+      await certificatesApi.delete(id);
+      setCertificates((prev) => prev.filter((c) => c._id !== id));
     }
   };
 
@@ -86,7 +96,7 @@ export default function CertificatesTable() {
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-800 dark:bg-gray-900">
             {certificates.map((c, idx) => (
-              <tr key={c.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+              <tr key={c._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                 <td className="px-4 py-3 text-sm whitespace-nowrap">{idx + 1}</td>
                 <td className="px-4 py-3 text-sm font-medium whitespace-nowrap">{c.name}</td>
                 <td className="px-4 py-3 text-sm whitespace-nowrap">{c.issuedBy}</td>
@@ -109,7 +119,7 @@ export default function CertificatesTable() {
                       <Pencil className="h-4 w-4" />
                     </button>
                     <button
-                      onClick={() => deleteCertificate(c.id)}
+                      onClick={() => deleteCertificate(c._id)}
                       className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                     >
                       <Trash className="h-4 w-4 text-red-600" />
@@ -123,70 +133,13 @@ export default function CertificatesTable() {
       </div>
 
       {/* ─ Modal ─ */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 py-6">
-          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
-            <div className="mb-4 flex items-center justify-between border-b pb-2 dark:border-gray-700">
-              <h2 className="text-xl font-semibold">
-                {current ? "Update Certificate" : "New Certificate"}
-              </h2>
-              <button
-                onClick={closeModal}
-                className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-medium">Name</label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium">Issued By</label>
-                <input
-                  name="issuedBy"
-                  value={form.issuedBy}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium">Certificate URL</label>
-                <input
-                  name="certificateUrl"
-                  value={form.certificateUrl}
-                  onChange={handleChange}
-                  className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                />
-              </div>
-              <div className="flex justify-end gap-2 pt-4">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                >
-                  {current ? "Save" : "Add"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      {modalOpen && <ModalCertificate
+        id={form?._id}
+        current={current}
+        closeModal={closeModal}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />}
     </section>
   );
 }
