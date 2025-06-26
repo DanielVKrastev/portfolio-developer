@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trash, X, EyeIcon } from "lucide-react";
+import contactsApi from "../../../api/contactsApi";
+import ModalContact from "./modal-contact/ModalContact";
 
 export default function ContactsTable() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -12,16 +14,16 @@ export default function ContactsTable() {
     };
 
     const [form, setForm] = useState(initialForm);
-    const [contacts, setContacts] = useState([
-        {
-            id: 1,
-            name: "Daniel Krastev",
-            email: "daniel@example.com",
-            subject: "Test subject",
-            message: "bla lba bla",
-            date: "bla lba bla",
-        },
-    ]);
+    const [contacts, setContacts] = useState([]);
+
+    useEffect(() => {
+        async function getAllSkills() {
+            const data = await contactsApi.getAll();
+            setContacts(data);
+        }
+
+        getAllSkills();
+    }, []);
 
     const openEdit = (cert) => {
         setCurrent(cert);
@@ -36,24 +38,30 @@ export default function ContactsTable() {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (current) {
+            // update
+            await contactsApi.update(current._id, form);
             setContacts((prev) =>
-                prev.map((c) => (c.id === current.id ? { ...current, ...form } : c))
+                prev.map((c) => (c._id === current._id ? { ...current, ...form } : c))
             );
         } else {
+            // add
+            const data = await contactsApi.create(form);
             setContacts((prev) => [
                 ...prev,
-                { id: Date.now(), ...form },
+                { _id: data._id, ...form },
             ]);
         }
         closeModal();
     };
 
-    const deleteContact = (id) => {
+    const deleteContact = async (id) => {
         if (confirm("Are you sure you want to delete the contact?")) {
-            setContacts((prev) => prev.filter((c) => c.id !== id));
+            // delete
+            await contactsApi.delete(id);
+            setContacts((prev) => prev.filter((c) => c._id !== id));
         }
     };
 
@@ -78,7 +86,7 @@ export default function ContactsTable() {
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-800 dark:bg-gray-900">
                         {contacts.map((c, idx) => (
-                            <tr key={c.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <tr key={c._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                                 <td className="px-4 py-3 text-sm whitespace-nowrap">{idx + 1}</td>
                                 <td className="px-4 py-3 text-sm font-medium whitespace-nowrap">{c.name}</td>
                                 <td className="px-4 py-3 text-sm whitespace-nowrap">{c.email}</td>
@@ -102,7 +110,7 @@ export default function ContactsTable() {
                                             <EyeIcon className="h-4 w-4" />
                                         </button>
                                         <button
-                                            onClick={() => deleteContact(c.id)}
+                                            onClick={() => deleteContact(c._id)}
                                             className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                                         >
                                             <Trash className="h-4 w-4 text-red-600" />
@@ -116,76 +124,12 @@ export default function ContactsTable() {
             </div>
 
             {/* ─ Modal ─ */}
-            {modalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 py-6">
-                    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
-                        <div className="mb-4 flex items-center justify-between border-b pb-2 dark:border-gray-700">
-                            <h2 className="text-xl font-semibold">
-                                Look Message
-                            </h2>
-                            <button
-                                onClick={closeModal}
-                                className="rounded p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                            >
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Name</label>
-                                <input
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    readOnly
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Email</label>
-                                <input
-                                    name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    readOnly
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                            <div>
-                                <label className="mb-1 block text-sm font-medium">Subject</label>
-                                <input
-                                    name="subject"
-                                    value={form.subject}
-                                    onChange={handleChange}
-                                    readOnly
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                />
-                            </div>
-                             <div>
-                                <label className="mb-1 block text-sm font-medium">Message</label>
-                                <textarea
-                                    name="message"
-                                    value={form.message}
-                                    onChange={handleChange}
-                                    readOnly
-                                    className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
-                                    rows={7}
-                                />
-                            </div>
-                            <div className="flex justify-end gap-2 pt-4">
-                                <button
-                                    type="button"
-                                    onClick={closeModal}
-                                    className="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
-                                >
-                                    Back
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
+            {modalOpen && <ModalContact
+                id={form?._id}
+                closeModal={closeModal}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />}
         </section>
     );
 }
