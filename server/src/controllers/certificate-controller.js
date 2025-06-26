@@ -21,7 +21,7 @@ certificateController.get('/', async (req, res) => {
     }
 });
 
-certificateController.get('/:contactId', async (req, res) => {
+certificateController.get('/:certificateId', async (req, res) => {
     const certificateId = req.params.certificateId;
 
     if (!mongoose.Types.ObjectId.isValid(certificateId)) {
@@ -47,7 +47,7 @@ certificateController.post('/', async (req, res) => {
     }
 });
 
-certificateController.patch('/:contactId', async (req, res) => {
+certificateController.patch('/:certificateId', async (req, res) => {
     const certificateId = req.params.certificateId;
     const updateData = req.body;
 
@@ -67,7 +67,7 @@ certificateController.patch('/:contactId', async (req, res) => {
     }
 });
 
-certificateController.delete('/:contactId', async (req, res) => {
+certificateController.delete('/:certificateId', async (req, res) => {
     const certificateId = req.params.certificateId;
     try {
         await certificateService.delete(certificateId);
