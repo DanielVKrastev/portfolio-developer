@@ -9,7 +9,7 @@ const menuItems = [
   { name: "🏅Certificates", href: "/admin/certificates" },
   { name: "💬Contacts", href: "/admin/contacts" },
   { name: "ℹ️About", href: "/admin/about" },
-  { name: "🚪Logout", href: "#" },
+  { name: "🚪Logout", href: "/admin/logout" },
 ];
 
 export default function Sidebar() {

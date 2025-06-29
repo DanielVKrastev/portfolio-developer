@@ -6,6 +6,7 @@ import SkillsTable from "../components/admin/skills/skillsTable";
 import CertificatesTable from "../components/admin/certificates/CertificatesTable";
 import ContactsTable from "../components/admin/contacts/ContactsTable";
 import AboutTable from "../components/admin/about/AboutTable";
+import Logout from "../components/admin/logout/Logout";
 
 export default function AdminPanel() {
 
@@ -21,6 +22,7 @@ export default function AdminPanel() {
               <Route path="/certificates" element={<CertificatesTable />} />
               <Route path="/contacts" element={<ContactsTable />} />
               <Route path="/about" element={<AboutTable />} />
+              <Route path="/logout" element={<Logout />} />
             </Routes>
           </main>
         </div>
