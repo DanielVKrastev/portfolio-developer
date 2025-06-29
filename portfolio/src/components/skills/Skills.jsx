@@ -1,21 +1,31 @@
 import { useEffect, useState } from "react";
 import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
 import skillsApi from "../../api/skillsApi";
+import certificatesApi from "../../api/certificatesApi";
 
 export default function Skills() {
     const [techStack, setTechStack] = useState([]);
+    const [certificates, setCertificates] = useState([]);
 
     useEffect(() => {
-        async function getData() {
+        async function getDataSkills() {
             const data = await skillsApi.getAll();
             setTechStack(data);
         }
 
-        getData();
+        async function getDataCertificates() {
+            const data = await certificatesApi.getAll();
+            setCertificates(data);
+        }
+
+        getDataSkills();
+        getDataCertificates();
     }, []);
 
     console.log(techStack);
-    
+    console.log(certificates);
+
+    /*
     const certificates = [
         {
             title: "TypeScript - May 2025",
@@ -53,6 +63,7 @@ export default function Skills() {
             url: "#",
         },
     ];
+    */
 
     /*const techStack = [
         { name: "HTML / CSS", level: 85 },
@@ -78,8 +89,8 @@ export default function Skills() {
                             <h3 className="text-2xl font-semibold text-gray-700 mb-6">Tech Stack</h3>
 
                             {techStack.map((skill) => (
-                                <ScrollReveal>
-                                <div key={skill.name} className="mb-6">
+                                <ScrollReveal key={skill._id}>
+                                <div key={skill._id} className="mb-6">
                                     <div className="flex justify-between mb-1">
                                         <span className="text-base font-medium text-gray-700">{skill.name}</span>
                                         <span className="text-sm font-medium text-gray-600">{skill.level}%</span>
@@ -102,14 +113,14 @@ export default function Skills() {
 
                             <ul className="space-y-4">
                                 {certificates.map((cert) => (
-                                    <ScrollReveal>
+                                    <ScrollReveal key={cert.name}>
                                     <li
-                                        key={cert.title}
+                                        key={cert.name}
                                         className="bg-gray-100 hover:bg-gray-200 transition p-4 rounded-xl shadow-sm"
                                     >
-                                        <a href={cert.url} target="_blank" rel="noopener noreferrer" className="block">
-                                            <h4 className="text-lg font-semibold text-gray-800">{cert.title}</h4>
-                                            <p className="text-sm text-gray-600">{cert.issuer}</p>
+                                        <a href={cert.certificateUrl} target="_blank" rel="noopener noreferrer" className="block">
+                                            <h4 className="text-lg font-semibold text-gray-800">{cert.name}</h4>
+                                            <p className="text-sm text-gray-600">{cert.issuedBy}</p>
                                         </a>
                                     </li>
                                     </ScrollReveal>

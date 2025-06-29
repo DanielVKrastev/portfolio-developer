@@ -4,7 +4,7 @@ import Home from './views/Home'
 import AdminPanel from './views/AdminPanel'
 import Login from './components/admin/login/Login'
 import AdminGuard from './guards/AdminGuard'
-import { AdminProvider } from './components/providers/AdminProvider'
+import { AdminProvider } from './providers/AdminProvider'
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
       </Route>
       <Route path="/admin/login" element={<Login />}/>
     </Routes>
-    </AdminProvider>
+    </AdminProvider >
     </>
   )
 }
