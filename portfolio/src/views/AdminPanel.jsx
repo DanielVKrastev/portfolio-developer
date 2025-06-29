@@ -10,19 +10,19 @@ import AboutTable from "../components/admin/about/AboutTable";
 export default function AdminPanel() {
 
   return (
-    <div className="flex min-h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')] bg-gradient bg-blend-multipl dark:text-white">
-      <Sidebar />
-      {/* Main content */}
-      <main className="flex-1 p-6 pt-16 overflow-y-auto">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/projects" element={<ProjectsTable />} />
-          <Route path="/skills" element={<SkillsTable />} />
-          <Route path="/certificates" element={<CertificatesTable />} />
-          <Route path="/contacts" element={<ContactsTable />} />
-          <Route path="/about" element={<AboutTable />} />
-        </Routes>
-      </main>
-    </div>
+        <div className="flex min-h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')] bg-gradient bg-blend-multipl dark:text-white">
+          <Sidebar />
+          {/* Main content */}
+          <main className="flex-1 p-6 pt-16 overflow-y-auto">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/projects" element={<ProjectsTable />} />
+              <Route path="/skills" element={<SkillsTable />} />
+              <Route path="/certificates" element={<CertificatesTable />} />
+              <Route path="/contacts" element={<ContactsTable />} />
+              <Route path="/about" element={<AboutTable />} />
+            </Routes>
+          </main>
+        </div>
   );
 }

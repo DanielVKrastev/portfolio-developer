@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router'
 import './App.css'
 import Home from './views/Home'
 import AdminPanel from './views/AdminPanel'
+import Login from './components/admin/login/Login'
+import AdminGuard from './guards/AdminGuard'
 
 function App() {
 
@@ -9,8 +11,12 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/admin/*" element={<AdminPanel />}/>
+      <Route element={<AdminGuard />}>
+          <Route path="/admin/*" element={<AdminPanel />}/>
+      </Route>
+      <Route path="/admin/login" element={<Login />}/>
     </Routes>
+    </AdminProvider>
     </>
   )
 }
