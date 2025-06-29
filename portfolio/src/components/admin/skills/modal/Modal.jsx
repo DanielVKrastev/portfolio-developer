@@ -62,6 +62,15 @@ export default function Modal(
                         />
                     </div>
                     <div>
+                        <label className="mb-1 block text-sm font-medium">Background Color</label>
+                        <input
+                            name="bgColor"
+                            defaultValue={form.bgColor}
+                            onChange={handleChange}
+                            className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
+                        />
+                    </div>
+                    <div>
                         <label className="mb-1 block text-sm font-medium">Image URL</label>
                         <input
                             name="imageUrl"
@@ -70,6 +79,7 @@ export default function Modal(
                             className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
                         />
                     </div>
+                    
                     <div className="flex justify-end gap-2 pt-4">
                         <button
                             type="button"

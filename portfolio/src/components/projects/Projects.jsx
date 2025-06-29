@@ -14,9 +14,6 @@ export default function Projects() {
         getDataProjects();
     }, []);
 
-    console.log(projects);
-    
-
     return (
         <>
             <section id="projects" className="bg-gray-50 py-20 px-4">

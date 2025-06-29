@@ -90,6 +90,7 @@ export default function SkillsTable() {
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Name</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Level</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Logo</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">BG Color</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>
@@ -106,6 +107,7 @@ export default function SkillsTable() {
                                         "-"
                                     )}
                                 </td>
+                                <td className="px-4 py-3 text-sm whitespace-nowrap">{s.bgColor}</td>
                                 <td className="px-4 py-3 text-sm whitespace-nowrap">
                                     <div className="flex items-center gap-2">
                                         <button

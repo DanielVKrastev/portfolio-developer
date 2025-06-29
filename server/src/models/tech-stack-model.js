@@ -11,6 +11,9 @@ const techStackSchema = new Schema({
         min: [0, 'The minimum level is 0'],
         require: [true, 'Tech Level is required'],
     },
+    bgColor: {
+        type: String,
+    },
     imageUrl: {
         type: String
     }

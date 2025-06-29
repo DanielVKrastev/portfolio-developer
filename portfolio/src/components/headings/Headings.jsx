@@ -1,6 +1,27 @@
-import { ArrowBigRightDash, ArrowLeft, ArrowRight, ArrowRightCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import aboutApi from "../../api/aboutApi";
+import skillsApi from "../../api/skillsApi";
 
 export default function Headings() {
+  const [aboutMe, setAboutMe] = useState({});
+  const [techStack, setTechStack] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      const data = await aboutApi.getAll(1);
+      setAboutMe(data[0]);
+    }
+
+    async function getDataSkills() {
+      const data = await skillsApi.getAll();
+      setTechStack(data);
+    }
+
+    getData();
+    getDataSkills();
+  }, []);
+
   return (
     <section className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
       <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-48">
@@ -8,61 +29,30 @@ export default function Headings() {
           {/* Text Section */}
           <div className="order-2 sm:order-1">
             <h1 className="mb-6 text-5xl font-extrabold italic tracking-tight leading-tight text-default-50 md:text-6xl lg:text-7xl">
-              Daniel Krastev
+              {aboutMe?.name}
             </h1>
             <h2 className="mb-6 text-4xl font-extrabold italic tracking-tight leading-tight text-default-50 md:text-4xl lg:text-4xl">
-              Web Developer
+              {aboutMe?.headline}
             </h2>
             <p className="mb-8 text-lg font-light italic text-gray-200 md:text-xl lg:px-0">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro corrupti dolorum praesentium officiis vel ad rem soluta voluptates.
+              {aboutMe?.headlineDescription}
             </p>
             <p className="mb-8 text-lg font-light italic text-gray-200 md:text-xl lg:px-0">
               Tech Stack
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 text-white">
 
-              {/* JavaScript */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/javascript-icon.svg" alt="JavaScript" className="w-5 h-5" />
-                <span className="font-medium">JavaScript</span>
-              </div>
+              {techStack.slice(2).map((skill) => {
+                return (
+                  <div key={skill._id}
+                    style={{ '--bg': skill.bgColor }}
+                   className={`flex items-center justify-center gap-2 px-4 py-2 [background:var(--bg)] hover:[filter:brightness(0.8)] text-white rounded-xl shadow-md transition-all duration-300`}>
+                    <img src={skill.imageUrl} alt="JavaScript" className="w-5 h-5" />
+                    <span className="font-medium">{skill.name}</span>
+                  </div>
+                )
+              })}
 
-              {/* React */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/react-js-icon.svg" alt="React" className="w-5 h-5" />
-                <span className="font-medium">React</span>
-              </div>
-
-              {/* Node.js */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-green-300 hover:bg-green-400 text-black rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/node-js-icon.svg" alt="Node.js" className="w-5 h-5" />
-                <span className="font-medium">Node.js</span>
-              </div>
-
-              {/* Tailwind */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/tailwind-css-icon.svg" alt="Tailwind" className="w-5 h-5" />
-                <span className="font-medium">Tailwind</span>
-              </div>
-
-
-              {/* PHP */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-800 rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/php-icon.svg" alt="PHP" className="w-8 h-5" />
-                <span className="font-medium">PHP</span>
-              </div>
-
-              {/* MySQL */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-300 hover:bg-blue-400 text-black rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/mysql-icon.svg" alt="mysql" className="w-8 h-5" />
-                <span className="font-medium">MySQL</span>
-              </div>
-
-              {/* Git */}
-              <div className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-xl shadow-md transition-all duration-300">
-                <img src="/icons/git-icon.svg" alt="Git" className="w-5 h-5" />
-                <span className="font-medium">Git</span>
-              </div>
             </div>
 
             {/* Buttons */}
@@ -72,7 +62,7 @@ export default function Headings() {
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
               >
                 Projects
-                <ArrowRightCircle className="w-6 ml-2"/>
+                <ArrowRightCircle className="w-6 ml-2" />
               </a>
               <a
                 href="#about"
