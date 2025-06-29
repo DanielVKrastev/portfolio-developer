@@ -4,11 +4,13 @@ import Home from './views/Home'
 import AdminPanel from './views/AdminPanel'
 import Login from './components/admin/login/Login'
 import AdminGuard from './guards/AdminGuard'
+import { AdminProvider } from './components/providers/AdminProvider'
 
 function App() {
 
   return (
     <>
+    <AdminProvider>
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route element={<AdminGuard />}>
