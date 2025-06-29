@@ -22,9 +22,6 @@ export default function Skills() {
         getDataCertificates();
     }, []);
 
-    console.log(techStack);
-    console.log(certificates);
-
     /*
     const certificates = [
         {
