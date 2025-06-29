@@ -21,7 +21,7 @@ aboutController.get('/', async (req, res) => {
     }
 });
 
-aboutController.get('/:contactId', async (req, res) => {
+aboutController.get('/:aboutId', async (req, res) => {
     const aboutId = req.params.aboutId;
 
     if (!mongoose.Types.ObjectId.isValid(aboutId)) {
@@ -47,7 +47,7 @@ aboutController.post('/', async (req, res) => {
     }
 });
 
-aboutController.patch('/:contactId', async (req, res) => {
+aboutController.patch('/:aboutId', async (req, res) => {
     const aboutId = req.params.aboutId;
     const updateData = req.body;
 
@@ -67,7 +67,7 @@ aboutController.patch('/:contactId', async (req, res) => {
     }
 });
 
-aboutController.delete('/:contactId', async (req, res) => {
+aboutController.delete('/:aboutId', async (req, res) => {
     const aboutId = req.params.aboutId;
     try {
         await aboutService.delete(aboutId);

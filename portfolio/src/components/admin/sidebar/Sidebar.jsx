@@ -8,6 +8,7 @@ const menuItems = [
   { name: "🧠Skills", href: "/admin/skills" },
   { name: "🏅Certificates", href: "/admin/certificates" },
   { name: "💬Contacts", href: "/admin/contacts" },
+  { name: "ℹ️About", href: "/admin/about" },
   { name: "🚪Logout", href: "#" },
 ];
 
