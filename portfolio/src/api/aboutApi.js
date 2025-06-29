@@ -4,8 +4,12 @@ import request from "../utils/requests";
 const baseUrl = `${BASEURL}/about`;
 
 export default {
-    async getAll() {
-        return await request('GET', baseUrl);
+    async getAll(limit = null) {
+        let url = baseUrl;
+        if(limit && typeof limit === 'number'){
+            url = `${baseUrl}?limit=${limit}`
+        }
+        return await request('GET', url);
     },
     async getOne(id){
         return await request('GET', `${baseUrl}/${id}`);
