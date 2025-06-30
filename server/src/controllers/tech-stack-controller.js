@@ -36,10 +36,15 @@ techStackController.get('/:techStackId', async (req, res) => {
 });
 
 techStackController.post('/', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     try {
         const data = req.body;
 
-        const createdData = await techStackService.create(data);
+        const createdData = await techStackService.create(accessToken, data);
         res.status(201).json(createdData);
     } catch(error) {
         const errMessage = getErrorMessage(error);
@@ -48,6 +53,11 @@ techStackController.post('/', async (req, res) => {
 });
 
 techStackController.patch('/:techStackId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const techStackId = req.params.techStackId;
     const updateData = req.body;
 
@@ -56,7 +66,7 @@ techStackController.patch('/:techStackId', async (req, res) => {
     }
 
     try {
-        const updatedData = await techStackService.update(techStackId, updateData);
+        const updatedData = await techStackService.update(accessToken, techStackId, updateData);
         if (!updatedData) {
             return res.status(404).json({ error: 'TechStack not found' });
         }
@@ -68,9 +78,14 @@ techStackController.patch('/:techStackId', async (req, res) => {
 });
 
 techStackController.delete('/:techStackId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+    
     const techStackId = req.params.techStackId;
     try {
-        await techStackService.delete(techStackId);
+        await techStackService.delete(accessToken, techStackId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );
