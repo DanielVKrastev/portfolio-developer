@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { Menu, Plus, Pencil, Trash, X } from "lucide-react";
 import projectsApi from "../../../api/projectsApi";
 import { ModalProject } from "./modal-project/ModalProject";
+import { useAdminContext } from "../../../contexts/AdminContext";
 
 export default function ProjectsTable() {
+    const { admin } = useAdminContext();
+    const accessToken = admin.accessToken;
 
     const [modalOpen, setModalOpen] = useState(false);
     const [current, setCurrent] = useState(null); // null → add, object → edit
@@ -53,13 +56,13 @@ export default function ProjectsTable() {
         e.preventDefault();
         if (current) {
             // edit
-            await projectsApi.update(current._id, form);
+            await projectsApi.update(accessToken, current._id, form);
             setProjects((prev) =>
                 prev.map((p) => (p._id === current._id ? { ...current, ...form } : p))
             );
         } else {
             // add
-            const data = await projectsApi.create(form);
+            const data = await projectsApi.create(accessToken, form);
             setProjects((prev) => [
                 ...prev,
                 { _id: data._id, ...form },
@@ -70,7 +73,7 @@ export default function ProjectsTable() {
 
     const deleteProject = async (id) => {
         if (confirm("Are you sure you want to delete the project?")) {
-             await projectsApi.delete(id);
+             await projectsApi.delete(accessToken, id);
             setProjects((prev) => prev.filter((p) => p._id !== id));
         }
     };
