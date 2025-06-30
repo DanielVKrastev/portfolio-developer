@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash } from "lucide-react";
 import ModalAbout from "./modal-about/ModalAbout";
 import aboutApi from "../../../api/aboutApi";
+import { useAdminContext } from "../../../contexts/AdminContext";
 
 export default function AboutTable() {
+    const { admin } = useAdminContext();
+    const accessToken = admin.accessToken;
+    
     const [modalOpen, setModalOpen] = useState(false);
     const [current, setCurrent] = useState(null); // null → add, object → edit
     const initialForm = {
@@ -57,13 +61,13 @@ export default function AboutTable() {
             // update
             console.log(form);
             
-            await aboutApi.update(current._id, form);
+            await aboutApi.update(accessToken, current._id, form);
             setAbout((prev) =>
                 prev.map((a) => (a._id === current._id ? { ...current, ...form } : a))
             );
         } else {
             // add
-            const data = await aboutApi.create(form);
+            const data = await aboutApi.create(accessToken, form);
             setAbout((prev) => [
                 ...prev,
                 { _id: data._id, ...form },
@@ -75,7 +79,7 @@ export default function AboutTable() {
     const deleteSkill = async (id) => {
         if (confirm("Are you sure you want delete this About?")) {
             // delete
-            await aboutApi.delete(id);
+            await aboutApi.delete(accessToken, id);
             setAbout((prev) => prev.filter((s) => s._id !== id));
         }
     };

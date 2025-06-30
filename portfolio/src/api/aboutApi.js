@@ -14,25 +14,32 @@ export default {
     async getOne(id){
         return await request('GET', `${baseUrl}/${id}`);
     },
-    async create(data){
-        /*
+    async create(accessToken, data){
+        
         const options = {
         headers: {
             'X-Authorization': accessToken,
         }
-        */
-        return await request('POST', baseUrl, data); //TODO: add options
+        };
+        
+        return await request('POST', baseUrl, data, options);
     },
-    async update(id, data){
-        /*
+    async update(accessToken, id, data){
+        
         const options = {
         headers: {
             'X-Authorization': accessToken,
         }
-        */
-        return await request('PATCH', `${baseUrl}/${id}`, data); //TODO: add options
+        };
+        
+        return await request('PATCH', `${baseUrl}/${id}`, data, options);
     },
-    async delete(id) {
-        return await request('DELETE', `${baseUrl}/${id}`);
+    async delete(accessToken, id) {
+        const options = {
+        headers: {
+            'X-Authorization': accessToken,
+        }
+        };
+        return await request('DELETE', `${baseUrl}/${id}`, [], options);
     }
 }

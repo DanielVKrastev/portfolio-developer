@@ -5,8 +5,6 @@ import { useAdminContext } from "../contexts/AdminContext";
 const AdminGuard = () => {
     const { admin } = useAdminContext();
     const isAuth = !!admin;
-    console.log(admin);
-    
 
     return isAuth ? <Outlet /> : <Navigate to="/admin/login" replace />;
 };
