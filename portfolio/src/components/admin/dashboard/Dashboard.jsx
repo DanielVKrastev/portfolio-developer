@@ -23,6 +23,12 @@ export default function Dashboard() {
                     </Link>
                 </section>
                 <section className="rounded-xl bg-white p-6 shadow dark:bg-gray-800">
+                    <h2 className="mb-2 text-xl font-semibold">About me</h2>
+                    <Link to="/admin/about">
+                    <p className="text-sm">Update and remove About.</p>
+                    </Link>
+                </section>
+                <section className="rounded-xl bg-white p-6 shadow dark:bg-gray-800">
                     <h2 className="mb-2 text-xl font-semibold">Contacts form</h2>
                     <Link to="/admin/contacts">
                         <p className="text-sm">See messages.</p>
