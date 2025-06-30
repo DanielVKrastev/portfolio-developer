@@ -36,10 +36,15 @@ projectController.get('/:projectId', async (req, res) => {
 });
 
 projectController.post('/', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     try {
         const data = req.body;
 
-        const createdData = await projectService.create(data);
+        const createdData = await projectService.create(accessToken, data);
         res.status(201).json(createdData);
     } catch(error) {
         const errMessage = getErrorMessage(error);
@@ -48,6 +53,12 @@ projectController.post('/', async (req, res) => {
 });
 
 projectController.patch('/:projectId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
+
     const projectId = req.params.projectId;
     const updateData = req.body;
 
@@ -56,7 +67,7 @@ projectController.patch('/:projectId', async (req, res) => {
     }
 
     try {
-        const updatedData = await projectService.update(projectId, updateData);
+        const updatedData = await projectService.update(accessToken, projectId, updateData);
         if (!updatedData) {
             return res.status(404).json({ error: 'Project not found' });
         }
@@ -68,9 +79,14 @@ projectController.patch('/:projectId', async (req, res) => {
 });
 
 projectController.delete('/:projectId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const projectId = req.params.projectId;
     try {
-        await projectService.delete(projectId);
+        await projectService.delete(accessToken, projectId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );
