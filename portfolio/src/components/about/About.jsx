@@ -1,19 +1,8 @@
 import { ArrowRightCircle, MessageSquareIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import aboutApi from "../../api/aboutApi";
 
-export default function About() {
-    const [aboutMe, setAboutMe] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const data = await aboutApi.getAll(1);
-            setAboutMe(data[0]);
-        }
-
-        getData();
-    }, []);
-
+export default function About({
+    aboutMe
+}) {
     const InfoBox = ({ title, value }) => (
         <div className="bg-default-50 p-4 rounded-xl shadow hover:shadow-md transition">
             <h3 className="text-gray-700 font-semibold text-lg mb-1">{title}</h3>

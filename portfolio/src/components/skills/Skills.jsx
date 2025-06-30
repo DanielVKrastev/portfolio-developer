@@ -1,27 +1,9 @@
-import { useEffect, useState } from "react";
 import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
-import skillsApi from "../../api/skillsApi";
-import certificatesApi from "../../api/certificatesApi";
 
-export default function Skills() {
-    const [techStack, setTechStack] = useState([]);
-    const [certificates, setCertificates] = useState([]);
-
-    useEffect(() => {
-        async function getDataSkills() {
-            const data = await skillsApi.getAll();
-            setTechStack(data);
-        }
-
-        async function getDataCertificates() {
-            const data = await certificatesApi.getAll();
-            setCertificates(data);
-        }
-
-        getDataSkills();
-        getDataCertificates();
-    }, []);
-
+export default function Skills({
+    techStack,
+    certificates
+}) {
     /*
     const certificates = [
         {

@@ -1,27 +1,9 @@
 import { ArrowRightCircle } from "lucide-react";
-import { useEffect, useState } from "react";
-import aboutApi from "../../api/aboutApi";
-import skillsApi from "../../api/skillsApi";
 
-export default function Headings() {
-  const [aboutMe, setAboutMe] = useState({});
-  const [techStack, setTechStack] = useState([]);
-
-  useEffect(() => {
-    async function getData() {
-      const data = await aboutApi.getAll(1);
-      setAboutMe(data[0]);
-    }
-
-    async function getDataSkills() {
-      const data = await skillsApi.getAll();
-      setTechStack(data);
-    }
-
-    getData();
-    getDataSkills();
-  }, []);
-
+export default function Headings({
+  aboutMe,
+  techStack
+}) {
   return (
     <section className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
       <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-48">

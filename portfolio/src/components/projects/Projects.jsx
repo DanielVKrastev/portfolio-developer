@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
-import projectsApi from "../../api/projectsApi";
 import ProjectCard from "./project-card/ProjectCard";
 
-export default function Projects() {
-    const [projects, setProjects] = useState([]);
-
-    useEffect(() => {
-        async function getDataProjects() {
-            const data = await projectsApi.getAll();
-            setProjects(data);
-        }
-
-        getDataProjects();
-    }, []);
-
+export default function Projects({
+    projects
+}) {
     return (
         <>
             <section id="projects" className="bg-gray-50 py-20 px-4">

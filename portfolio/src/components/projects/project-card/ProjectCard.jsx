@@ -27,7 +27,7 @@ export default function ProjectCard({
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-4">
                         {techStackArr.map((t) => (
-                            <span className="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full">{t}</span>
+                            <span key={t} className="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full">{t}</span>
                         ))}
                     </div>
 
