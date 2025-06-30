@@ -36,10 +36,15 @@ certificateController.get('/:certificateId', async (req, res) => {
 });
 
 certificateController.post('/', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     try {
         const data = req.body;
 
-        const createdData = await certificateService.create(data);
+        const createdData = await certificateService.create(accessToken, data);
         res.status(201).json(createdData);
     } catch(error) {
         const errMessage = getErrorMessage(error);
@@ -48,6 +53,11 @@ certificateController.post('/', async (req, res) => {
 });
 
 certificateController.patch('/:certificateId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const certificateId = req.params.certificateId;
     const updateData = req.body;
 
@@ -56,7 +66,7 @@ certificateController.patch('/:certificateId', async (req, res) => {
     }
 
     try {
-        const updatedData = await certificateService.update(certificateId, updateData);
+        const updatedData = await certificateService.update(accessToken, certificateId, updateData);
         if (!updatedData) {
             return res.status(404).json({ error: 'Certificate not found' });
         }
@@ -68,9 +78,14 @@ certificateController.patch('/:certificateId', async (req, res) => {
 });
 
 certificateController.delete('/:certificateId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const certificateId = req.params.certificateId;
     try {
-        await certificateService.delete(certificateId);
+        await certificateService.delete(accessToken, certificateId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );
