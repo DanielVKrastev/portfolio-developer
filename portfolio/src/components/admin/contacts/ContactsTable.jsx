@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { Trash, X, EyeIcon } from "lucide-react";
 import contactsApi from "../../../api/contactsApi";
 import ModalContact from "./modal-contact/ModalContact";
+import { useAdminContext } from "../../../contexts/AdminContext";
 
 export default function ContactsTable() {
+    const { admin } = useAdminContext();
+    const accessToken = admin.accessToken;
+
     const [modalOpen, setModalOpen] = useState(false);
     const [current, setCurrent] = useState(null); // null → add, object → edit
 
@@ -42,7 +46,7 @@ export default function ContactsTable() {
         e.preventDefault();
         if (current) {
             // update
-            await contactsApi.update(current._id, form);
+            await contactsApi.update(accessToken, current._id, form);
             setContacts((prev) =>
                 prev.map((c) => (c._id === current._id ? { ...current, ...form } : c))
             );
@@ -60,7 +64,7 @@ export default function ContactsTable() {
     const deleteContact = async (id) => {
         if (confirm("Are you sure you want to delete the contact?")) {
             // delete
-            await contactsApi.delete(id);
+            await contactsApi.delete(accessToken, id);
             setContacts((prev) => prev.filter((c) => c._id !== id));
         }
     };
