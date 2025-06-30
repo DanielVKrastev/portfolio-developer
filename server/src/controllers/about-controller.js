@@ -36,10 +36,15 @@ aboutController.get('/:aboutId', async (req, res) => {
 });
 
 aboutController.post('/', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     try {
         const data = req.body;
 
-        const createdData = await aboutService.create(data);
+        const createdData = await aboutService.create(accessToken, data);
         res.status(201).json(createdData);
     } catch(error) {
         const errMessage = getErrorMessage(error);
@@ -48,6 +53,11 @@ aboutController.post('/', async (req, res) => {
 });
 
 aboutController.patch('/:aboutId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const aboutId = req.params.aboutId;
     const updateData = req.body;
 
@@ -56,7 +66,7 @@ aboutController.patch('/:aboutId', async (req, res) => {
     }
 
     try {
-        const updatedData = await aboutService.update(aboutId, updateData);
+        const updatedData = await aboutService.update(accessToken, aboutId, updateData);
         if (!updatedData) {
             return res.status(404).json({ error: 'About not found' });
         }
@@ -68,9 +78,14 @@ aboutController.patch('/:aboutId', async (req, res) => {
 });
 
 aboutController.delete('/:aboutId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+    
     const aboutId = req.params.aboutId;
     try {
-        await aboutService.delete(aboutId);
+        await aboutService.delete(accessToken, aboutId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );
