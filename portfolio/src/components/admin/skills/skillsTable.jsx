@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash, Upload } from "lucide-react";
 import skillsApi from "../../../api/skillsApi";
 import Modal from "./modal/Modal";
+import { useAdminContext } from "../../../contexts/AdminContext";
 
 export default function SkillsTable() {
+    const { admin } = useAdminContext();
+    const accessToken = admin.accessToken;
+
     const [modalOpen, setModalOpen] = useState(false);
     const [current, setCurrent] = useState(null); // null → add, object → edit
     const initialForm = {
@@ -47,13 +51,13 @@ export default function SkillsTable() {
         e.preventDefault();
         if (current) {
             // update
-            await skillsApi.update(current._id, form);
+            await skillsApi.update(accessToken, current._id, form);
             setSkills((prev) =>
                 prev.map((s) => (s._id === current._id ? { ...current, ...form } : s))
             );
         } else {
             // add
-            const data = await skillsApi.create(form);
+            const data = await skillsApi.create(accessToken, form);
             setSkills((prev) => [
                 ...prev,
                 { _id: data._id, ...form },
@@ -65,7 +69,7 @@ export default function SkillsTable() {
     const deleteSkill = async (id) => {
         if (confirm("Are you sure you want delete this skill?")) {
             // delete
-            await skillsApi.delete(id);
+            await skillsApi.delete(accessToken, id);
             setSkills((prev) => prev.filter((s) => s._id !== id));
         }
     };
