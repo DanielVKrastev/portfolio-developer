@@ -32,7 +32,7 @@ export default function Login() {
     }
     return (
         <>
-            <div className="min-h-screen flex items-center justify-center w-full bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')] bg-gradient bg-blend-multipl">
+            <div className="min-h-screen flex items-center justify-center w-full bg-center bg-no-repeat bg-cover bg-[url('/images/background_light.png')] dark:bg-[url('/images/background.png')] bg-gradient bg-blend-multipl">
                 <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md">
                     <h1 className="text-2xl font-bold text-center mb-4">
                         Welcome To Admin Panel!
