@@ -11,7 +11,7 @@ import Logout from "../components/admin/logout/Logout";
 export default function AdminPanel() {
 
   return (
-        <div className="flex min-h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')] bg-gradient bg-blend-multipl dark:text-white">
+        <div className="flex min-h-screen bg-center bg-no-repeat bg-cover bg-[url('/images/background_light.png')] dark:bg-[url('/images/background.png')] bg-gradient bg-blend-multipl dark:text-white">
           <Sidebar />
           {/* Main content */}
           <main className="flex-1 p-6 pt-16 overflow-y-auto">

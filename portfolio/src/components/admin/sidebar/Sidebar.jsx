@@ -19,7 +19,7 @@ export default function Sidebar() {
     <>
       {/* Mobile toggle button */}
       <button
-        className="fixed left-4 top-4 z-50 rounded p-2 text-white shadow md:hidden bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        className="fixed left-4 top-4 z-50 rounded p-2 text-white shadow md:hidden dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label="Toggle sidebar"
       >
@@ -28,7 +28,7 @@ export default function Sidebar() {
 
       {/* Sidebar (desktop + mobile) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-gray-800 text-white transition-transform duration-300 md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-gray-200 dark:bg-gray-800 dark:text-white transition-transform duration-300 md:static md:translate-x-0 ${
   sidebarOpen ? "translate-x-0" : "-translate-x-full"
 }`}
       >
@@ -38,7 +38,7 @@ export default function Sidebar() {
             <Link
               key={item.name}
               to={item.href}
-              className="block px-6 py-3 hover:bg-gray-700"
+              className="block px-6 py-3 hover:bg-gray-300 dark:hover:bg-gray-700"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {item.name}
