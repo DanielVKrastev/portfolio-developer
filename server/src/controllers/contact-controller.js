@@ -48,6 +48,11 @@ contactController.post('/', async (req, res) => {
 });
 
 contactController.patch('/:contactId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const contactId = req.params.contactId;
     const updateData = req.body;
 
@@ -56,7 +61,7 @@ contactController.patch('/:contactId', async (req, res) => {
     }
 
     try {
-        const updatedData = await contactService.update(contactId, updateData);
+        const updatedData = await contactService.update(accessToken, contactId, updateData);
         if (!updatedData) {
             return res.status(404).json({ error: 'Contact Message not found' });
         }
@@ -68,9 +73,14 @@ contactController.patch('/:contactId', async (req, res) => {
 });
 
 contactController.delete('/:contactId', async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken) {
+        return res.status(403).json({ error: 'No token provided' });
+    }
+
     const contactId = req.params.contactId;
     try {
-        await contactService.delete(contactId);
+        await contactService.delete(accessToken, contactId);
         res.status(200).json({});
     } catch(error) {
         res.status(400).json( {error } );

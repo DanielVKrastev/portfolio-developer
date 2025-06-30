@@ -1,4 +1,8 @@
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../constants-config.js';
+
 import Contact from "../models/contact-model.js";
+import Admin from "../models/admin-model.js";
 
 export default {
     async getAll(){
@@ -10,15 +14,26 @@ export default {
         return data;
     },
     async create(data){
+
         const creadtedData = await Contact.create(data);
         return creadtedData;
     },
-    async update(id, updateData){
+    async update(accessToken, id, updateData){
+        const decoded = jwt.verify(accessToken, JWT_SECRET);
+        const admin = await Admin.findById(decoded.id);
+
+        if(!admin) throw new Error("You don't have permission.");
+
         const updateContact = await Contact.findByIdAndUpdate(id, updateData, {new: true, runValidators: true });
         
         return this.getOne(updateContact);
     },
-    async delete(id){
+    async delete(accessToken, id){
+        const decoded = jwt.verify(accessToken, JWT_SECRET);
+        const admin = await Admin.findById(decoded.id);
+
+        if(!admin) throw new Error("You don't have permission.");
+
         return await Contact.findByIdAndDelete(id);
     },
     async getAllLimit(limit){
