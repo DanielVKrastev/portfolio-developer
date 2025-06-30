@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash, X } from "lucide-react";
 import certificatesApi from "../../../api/certificatesApi";
 import ModalCertificate from "./modal-certificate/ModalCertificate";
+import { useAdminContext } from "../../../contexts/AdminContext";
 
 export default function CertificatesTable() {
+  const { admin } = useAdminContext();
+  const accessToken = admin.accessToken;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [current, setCurrent] = useState(null); // null → add, object → edit
 
@@ -48,13 +52,13 @@ export default function CertificatesTable() {
     e.preventDefault();
     if (current) {
       //update
-      await certificatesApi.update(current._id, form);
+      await certificatesApi.update(accessToken, current._id, form);
       setCertificates((prev) =>
         prev.map((c) => (c._id === current._id ? { ...current, ...form } : c))
       );
     } else {
       // add
-      const data = await certificatesApi.create(form);
+      const data = await certificatesApi.create(accessToken, form);
       setCertificates((prev) => [
         ...prev,
         { _id: data._id, ...form },
@@ -66,7 +70,7 @@ export default function CertificatesTable() {
   const deleteCertificate = async (id) => {
     if (confirm("Are you sure you want to delete the certificate?")) {
       // delete
-      await certificatesApi.delete(id);
+      await certificatesApi.delete(accessToken, id);
       setCertificates((prev) => prev.filter((c) => c._id !== id));
     }
   };
