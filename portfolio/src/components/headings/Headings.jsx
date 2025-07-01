@@ -59,7 +59,7 @@ export default function Headings({
           <div className="flex justify-center sm:justify-end order-1 sm:order-2">
             <img
               className="rounded-full shadow-2xl w-92 h-92 md:w-150 md:h-150 object-cover border-4 border-default-500"
-              src="/images/daniel-portfolio-image.jpg"
+              src={aboutMe?.imageUrl || "/images/daniel-portfolio-image.jpg"}
               alt="Daniel Krastev"
             />
           </div>

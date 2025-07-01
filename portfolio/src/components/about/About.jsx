@@ -26,7 +26,7 @@ export default function About({
                     {/* Image Section */}
                     <div className="flex justify-center">
                         <img
-                            src="/images/daniel-portfolio-image.jpg"
+                            src={aboutMe?.imageUrl2 || aboutMe?.imageUrl || "/images/daniel-portfolio-image.jpg"}
                             alt="Daniel Krastev"
                             className="w-92 h-92 md:w-176 md:h-176 rounded-3xl object-cover shadow-xl border-4 border-gray-100"
                         />
