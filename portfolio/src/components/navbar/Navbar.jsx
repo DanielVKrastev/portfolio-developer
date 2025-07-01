@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [openMobileNav, setOpenMobileNav] = useState(false);
 
     const location = useLocation();
+    const navigate = useNavigate();
 
+    //use effect for background color navigate
     useEffect(() => {
         const handleScroll = () => {
             const offset = window.scrollY;
@@ -17,9 +19,34 @@ export default function Navbar() {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-    
+
+    //use effect for scrolling change active button in navbar
+    useEffect(() => {
+        const sections = ["home", "about", "skills", "projects", "contacts"];
+
+        const handleScroll = () => {
+            for (const id of sections) {
+                const element = document.getElementById(id);
+                if (!element) continue;
+
+                const { top, bottom } = element.getBoundingClientRect();
+                if (top <= 100 && bottom >= 100) {
+                    if (location.hash !== `#${id}`) {
+                        navigate(`#${id}`, { replace: true });
+                    }
+                    break;
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [navigate, location.hash]);
+
     const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 border-b border-gray-500 ${scrolled || openMobileNav ? 'bg-gray-50/98 shadow-md' : 'bg-transparent'}`;
-    const liClassesActive = `block py-2 px-3 md:p-0 ${openMobileNav? 'text-black' : 'text-white'} bg-default-700 rounded-sm md:bg-transparent ${scrolled || openMobileNav ? 'md:text-default-700' : 'bg-white'}`;
+    const liClassesActive = `block py-2 px-3 md:p-0 ${openMobileNav ? 'text-black' : 'text-white'} bg-default-700 rounded-sm md:bg-transparent ${scrolled || openMobileNav ? 'md:text-default-700' : 'bg-white'}`;
     const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-default-700' : 'md:text-gray-400 md:hover:text-white'} `;
 
     return (
@@ -80,7 +107,7 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#"
-                                    className={`${location.hash === '' ? liClassesActive : liClassesNoActive }`}
+                                    className={`${location.hash === '' || location.hash === '#home' ? liClassesActive : liClassesNoActive}`}
                                     aria-current="page"
                                     onClick={() => {
                                         setOpenMobileNav(false);
@@ -92,7 +119,7 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#about"
-                                    className={`${location.hash === '#about'? liClassesActive : liClassesNoActive }`}
+                                    className={`${location.hash === '#about' ? liClassesActive : liClassesNoActive}`}
                                     onClick={() => {
                                         setOpenMobileNav(false);
                                     }}
@@ -103,7 +130,7 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#skills"
-                                    className={`${location.hash === '#skills'? liClassesActive : liClassesNoActive }`}
+                                    className={`${location.hash === '#skills' ? liClassesActive : liClassesNoActive}`}
                                     onClick={() => {
                                         setOpenMobileNav(false);
                                     }}
@@ -114,7 +141,7 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#projects"
-                                    className={`${location.hash === '#projects'? liClassesActive : liClassesNoActive }`}
+                                    className={`${location.hash === '#projects' ? liClassesActive : liClassesNoActive}`}
                                     onClick={() => {
                                         setOpenMobileNav(false);
                                     }}
