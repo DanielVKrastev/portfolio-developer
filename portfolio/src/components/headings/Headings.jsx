@@ -5,7 +5,7 @@ export default function Headings({
   techStack
 }) {
   return (
-    <section className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
+    <section id="#home" className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
       <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-48">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
           {/* Text Section */}

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const [openMobileNav, setOpenMobileNav] = useState(false);
+
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -13,19 +17,20 @@ export default function Navbar() {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+    
+    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 border-b border-gray-500 ${scrolled || openMobileNav ? 'bg-gray-50/98 shadow-md' : 'bg-transparent'}`;
+    const liClassesActive = `block py-2 px-3 md:p-0 ${openMobileNav? 'text-black' : 'text-white'} bg-default-700 rounded-sm md:bg-transparent ${scrolled || openMobileNav ? 'md:text-default-700' : 'bg-white'}`;
+    const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-default-700' : 'md:text-gray-400 md:hover:text-white'} `;
 
-    const navClasses = `sticky top-0 left-0 w-full transition-all duration-300 z-50 ${scrolled ? 'bg-gray-50/98 shadow-md' : 'border-b border-gray-500 bg-transparent'}`;
-    const liClassesActive = `block py-2 px-3 md:p-0 text-white bg-blue-700 rounded-sm md:bg-transparent ${scrolled ? 'md:text-default-700' : 'bg-white'} `;
-    const liClassesNoActive = `block py-2 px-3 md:p-0 rounded-sm hover:bg-gray-100 md:hover:bg-transparent ${scrolled ? 'md:text-gray-700 md:hover:text-default-700' : 'text-gray-400 md:hover:text-white'} `;
     return (
         <>
             <nav className={navClasses}>
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a
-                        href="https://flowbite.com/"
+                        href="#"
                         className="flex items-center space-x-3 rtl:space-x-reverse"
                     >
-                        <span className={`self-center text-2xl font-semibold whitespace-nowrap ${scrolled ? 'text-default-600' : 'text-white'}`}>
+                        <span className={`self-center text-2xl font-semibold whitespace-nowrap ${scrolled || openMobileNav ? 'text-default-600' : 'text-white'}`}>
                             DanielKrastev.
                         </span>
                     </a>
@@ -43,6 +48,7 @@ export default function Navbar() {
                             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                             aria-controls="navbar-cta"
                             aria-expanded="false"
+                            onClick={() => setOpenMobileNav(state => !state)}
                         >
                             <span className="sr-only">Open main menu</span>
                             <svg
@@ -63,15 +69,22 @@ export default function Navbar() {
                         </button>
                     </div>
                     <div
-                        className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+                        className={`absolute left-0 top-full z-40 w-full
+                                    bg-white/95 backdrop-blur
+                                    border-b border-gray-200
+                                    ${openMobileNav ? 'block' : 'hidden'}
+                                    md:static md:flex md:w-auto md:bg-transparent md:border-0`}
                         id="navbar-cta"
                     >
-                        <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+                        <ul className="flex flex-col text-center font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
                             <li>
                                 <a
                                     href="#"
-                                    className={liClassesActive}
+                                    className={`${location.hash === '' ? liClassesActive : liClassesNoActive }`}
                                     aria-current="page"
+                                    onClick={() => {
+                                        setOpenMobileNav(false);
+                                    }}
                                 >
                                     Home
                                 </a>
@@ -79,7 +92,10 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#about"
-                                    className={liClassesNoActive}
+                                    className={`${location.hash === '#about'? liClassesActive : liClassesNoActive }`}
+                                    onClick={() => {
+                                        setOpenMobileNav(false);
+                                    }}
                                 >
                                     About
                                 </a>
@@ -87,7 +103,10 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#skills"
-                                    className={liClassesNoActive}
+                                    className={`${location.hash === '#skills'? liClassesActive : liClassesNoActive }`}
+                                    onClick={() => {
+                                        setOpenMobileNav(false);
+                                    }}
                                 >
                                     Skills
                                 </a>
@@ -95,7 +114,10 @@ export default function Navbar() {
                             <li>
                                 <a
                                     href="#projects"
-                                    className={liClassesNoActive}
+                                    className={`${location.hash === '#projects'? liClassesActive : liClassesNoActive }`}
+                                    onClick={() => {
+                                        setOpenMobileNav(false);
+                                    }}
                                 >
                                     Projects
                                 </a>
