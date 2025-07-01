@@ -9,6 +9,7 @@ import aboutApi from '../api/aboutApi'
 import skillsApi from '../api/skillsApi'
 import certificatesApi from '../api/certificatesApi'
 import projectsApi from '../api/projectsApi'
+import { ToTopButton } from '../components/to-top-button/ToTopButton'
 
 export default function Home() {
   const [aboutMe, setAboutMe] = useState({});
@@ -54,6 +55,8 @@ export default function Home() {
       />
 
       <Contact />
+
+      <ToTopButton />
     </>
   )
 }
