@@ -1,7 +1,7 @@
 import { motion as Motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-export const ScrollReveal = ({ children, once = false, offset = "0px 0px -10% 0px" }) => {
+export const ScrollReveal = ({ children, once = false, offset = "0px 0px -5% 0px" }) => {
   const ref = useRef(null);
   const [isVisible, setVisible] = useState(false);
 
@@ -16,7 +16,7 @@ export const ScrollReveal = ({ children, once = false, offset = "0px 0px -10% 0p
         }
       },
       {
-        rootMargin: offset, // Покажи малко по-рано
+        rootMargin: offset, // Show a little earlier
         threshold: 0.3,
       }
     );

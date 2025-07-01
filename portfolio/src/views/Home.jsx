@@ -4,7 +4,6 @@ import Contact from '../components/contact/Contact'
 import Headings from '../components/headings/Headings'
 import Navbar from '../components/navbar/Navbar'
 import Projects from '../components/projects/Projects'
-import { ScrollReveal } from '../components/scroll-reveal/ScrollReveal'
 import Skills from '../components/skills/Skills'
 import aboutApi from '../api/aboutApi'
 import skillsApi from '../api/skillsApi'
@@ -46,22 +45,15 @@ export default function Home() {
         aboutMe={aboutMe}
       />
 
-      <ScrollReveal once offset="0px 0px -20% 0px">
-        <Skills
-          techStack={techStack}
-          certificates={certificates}
-        />
-      </ScrollReveal>
+      <Skills
+        techStack={techStack}
+        certificates={certificates}
+      />
+      <Projects
+        projects={projects}
+      />
 
-      <ScrollReveal once offset="0px 0px -20% 0px">
-        <Projects
-          projects={projects}
-        />
-      </ScrollReveal>
-
-      <ScrollReveal once offset="0px 0px -20% 0px">
-        <Contact />
-      </ScrollReveal>
+      <Contact />
     </>
   )
 }

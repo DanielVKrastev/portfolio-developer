@@ -1,4 +1,5 @@
 import { ArrowRightCircle, MessageSquareIcon } from "lucide-react";
+import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
 
 export default function About({
     aboutMe
@@ -34,38 +35,43 @@ export default function About({
 
                     {/* Text Section */}
                     <div>
-                        <div className="mb-8">
-                            <h3 className="text-2xl font-semibold text-default-800 mb-2">Get to know me</h3>
-                            <h4 className="text-xl font-medium text-default-600 mb-4">Hi, I’m {aboutMe?.name} 👋</h4>
-                            <p className="text-gray-700 leading-relaxed text-lg">
-                                {aboutMe?.mainDescription}
-                            </p>
-                        </div>
+                        <ScrollReveal>
+                            <div className="mb-8">
+                                <h3 className="text-2xl font-semibold text-default-800 mb-2">Get to know me</h3>
+                                <h4 className="text-xl font-medium text-default-600 mb-4">Hi, I’m {aboutMe?.name} 👋</h4>
+                                <p className="text-gray-700 leading-relaxed text-lg">
+                                    {aboutMe?.mainDescription}
+                                </p>
+                            </div>
+                        </ScrollReveal>
+
 
                         {/* Info Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <InfoBox title="Age" value={aboutMe?.age} />
-                            <InfoBox title="Location" value={aboutMe?.location} />
-                            <InfoBox title="Email" value={aboutMe?.email} />
-                            <InfoBox title="Experience" value={`${aboutMe?.experience}+ years`} />
+                            <ScrollReveal><InfoBox title="Age" value={aboutMe?.age} /></ScrollReveal>
+                            <ScrollReveal><InfoBox title="Location" value={aboutMe?.location} /></ScrollReveal>
+                            <ScrollReveal><InfoBox title="Email" value={aboutMe?.email} /></ScrollReveal>
+                            <ScrollReveal><InfoBox title="Experience" value={`${aboutMe?.experience}+ years`} /></ScrollReveal>
                         </div>
 
                         {/* Buttons */}
-                        <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                            <a
-                                href="#projects"
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
-                            >
-                                Projects <ArrowRightCircle className="w-5 h-5 ml-2" />
-                            </a>
-                            <a
-                                href="#contacts"
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
-                            >
-                                <MessageSquareIcon className="w-5 h-5 mr-2" />
-                                Contact Me
-                            </a>
-                        </div>
+                        <ScrollReveal>
+                            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                                <a
+                                    href="#projects"
+                                    className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
+                                >
+                                    Projects <ArrowRightCircle className="w-5 h-5 ml-2" />
+                                </a>
+                                <a
+                                    href="#contacts"
+                                    className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-default-600 hover:bg-default-800 rounded-lg shadow-lg transition"
+                                >
+                                    <MessageSquareIcon className="w-5 h-5 mr-2" />
+                                    Contact Me
+                                </a>
+                            </div>
+                        </ScrollReveal>
                     </div>
 
                 </div>
