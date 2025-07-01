@@ -1,6 +1,22 @@
 import { SendIcon } from "lucide-react";
+import contactsApi from "../../api/contactsApi";
 
 export default function Contact() {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(e.currentTarget);
+        const messageData = Object.fromEntries(formData);
+
+        try {
+            await contactsApi.create(messageData);
+            form.reset();
+            alert("Message sended.") //TODO: Show message box
+        } catch (error) {
+            console.log(error);
+            alert("Error sending message"); //TODO: Show message box
+        }
+    }
     return (
         <>
             <section id="contacts" className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
@@ -14,7 +30,7 @@ export default function Contact() {
                         </p>
                     </div>
 
-                    <form action="#" className="space-y-8">
+                    <form onSubmit={handleSubmit} className="space-y-8">
                         {/* Name */}
                         <div>
                             <label
@@ -24,6 +40,7 @@ export default function Contact() {
                                 Your name
                             </label>
                             <input
+                                name="name"
                                 type="name"
                                 id="name"
                                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
@@ -40,6 +57,7 @@ export default function Contact() {
                                 Your email
                             </label>
                             <input
+                                name="email"
                                 type="email"
                                 id="email"
                                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
@@ -56,6 +74,7 @@ export default function Contact() {
                                 Subject
                             </label>
                             <input
+                                name="subject"
                                 type="text"
                                 id="subject"
                                 className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
@@ -72,6 +91,7 @@ export default function Contact() {
                                 Your message
                             </label>
                             <textarea
+                                name="message"
                                 id="message"
                                 rows={6}
                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
