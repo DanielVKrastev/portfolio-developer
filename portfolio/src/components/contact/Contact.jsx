@@ -1,7 +1,12 @@
 import { SendIcon } from "lucide-react";
 import contactsApi from "../../api/contactsApi";
+import MessageToast from "../message-toast/MessageToast";
+import { useState } from "react";
 
 export default function Contact() {
+    const [message, setMessage] = useState({content: '', type: ''});
+    const [showMessage, setShowMessage] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -11,14 +16,17 @@ export default function Contact() {
         try {
             await contactsApi.create(messageData);
             form.reset();
-            alert("Message sended.") //TODO: Show message box
+            setShowMessage(true);
+            setMessage({content: "Message sended success.", type: "success"});
         } catch (error) {
             console.log(error);
-            alert("Error sending message"); //TODO: Show message box
+            setShowMessage(true);
+            setMessage({content: "Error sending message.", type: "error"});
         }
     }
     return (
         <>
+        {showMessage && <MessageToast message={message} onClose={setShowMessage}/>}
             <section id="contacts" className="relative -mt-20 bg-center bg-no-repeat bg-cover bg-[url('/images/background.png')]  bg-gray-900/10 bg-gradient bg-blend-multiply">
                 <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                     <div className="max-w-5xl mx-auto text-center mb-12 px-4">
