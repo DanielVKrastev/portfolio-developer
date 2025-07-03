@@ -1,6 +1,5 @@
 import express from 'express';
 import 'dotenv/config';
-import { MONGODB_URI_LOCAL, MONGODB_URI_ONLINE } from '../constants.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import routes from './routes.js';
@@ -34,5 +33,5 @@ app.use(express.urlencoded( { extended: false } ));
 //route
 app.use(routes);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Server is lestening on port ${port} ...`));
