@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config';
 import { MONGODB_URI_LOCAL, MONGODB_URI_ONLINE } from '../constants.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -6,8 +7,8 @@ import routes from './routes.js';
 
 const app = express();
 
-const onlineUri = MONGODB_URI_ONLINE;
-const localUri = MONGODB_URI_LOCAL;
+const onlineUri = process.env.MONGODB_URI_ONLINE;
+const localUri  = process.env.MONGODB_URI_LOCAL;
 
 try{
     await mongoose.connect(onlineUri);
