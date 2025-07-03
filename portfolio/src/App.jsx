@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router'
+import { lazy } from 'react'
 import './App.css'
 import Home from './views/Home'
-import AdminPanel from './views/AdminPanel'
-import Login from './components/admin/login/Login'
-import AdminGuard from './guards/AdminGuard'
+
 import { AdminProvider } from './providers/AdminProvider'
+const AdminPanel = lazy(() => import('./views/AdminPanel'));
+const Login = lazy(() => import('./components/admin/login/Login'));
+const AdminGuard = lazy(() => import('./guards/AdminGuard'));
 
 function App() {
 
@@ -12,7 +14,7 @@ function App() {
     <>
     <AdminProvider>
     <Routes>
-      <Route path="/" element={<Home />}/>
+      <Route path="/*" element={<Home />}/>
       <Route element={<AdminGuard />}>
           <Route path="/admin/*" element={<AdminPanel />}/>
       </Route>
