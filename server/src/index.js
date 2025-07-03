@@ -6,7 +6,7 @@ import routes from './routes.js';
 
 const app = express();
 
-//const onlineUri = MONGODB_URI_ONLINE;
+const onlineUri = MONGODB_URI_ONLINE;
 const localUri = MONGODB_URI_LOCAL;
 
 try{
