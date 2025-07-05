@@ -1,4 +1,3 @@
-import { SidebarClose } from "lucide-react";
 import { ScrollReveal } from "../../scroll-reveal/ScrollReveal";
 
 export default function ProjectCard({
@@ -8,45 +7,46 @@ export default function ProjectCard({
     imageUrl,
     techStack,
 }) {
-    const techStackArr = techStack.split(', ');
+    const techStackArr = techStack.split(", ");
 
     return (
-        <>
-            <ScrollReveal>
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
-                    {/* Image */}
-                    <img
-                        src={imageUrl}
-                        alt={`project-${name}`}
-                        className="w-full h-52 object-cover"
-                    />
+        <ScrollReveal>
+            <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
+                {/* Image */}
+                <img
+                    src={imageUrl}
+                    alt={`project-${name}`}
+                    className="h-52 w-full object-cover"
+                />
 
-                    {/* Content */}
-                    <div className="p-6">
-                        <h3 className="text-2xl font-semibold text-gray-800 mb-2">{name}</h3>
-                        <p className="text-gray-600 mb-4">
-                            {description}
-                        </p>
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6">
+                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">{name}</h3>
 
-                        {/* Technologies */}
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {techStackArr.map((t) => (
-                                <span key={t} className="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full">{t}</span>
-                            ))}
-                        </div>
+                    <p className="mb-4 line-clamp-7 text-gray-600">{description}</p>
 
-                        {/* Link */}
-                        <a
-                            href={projectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block text-default-600 hover:text-default-800 font-semibold transition"
-                        >
-                            View Project →
-                        </a>
+                    {/* Tech stack */}
+                    <div className="mb-4 flex flex-wrap gap-2">
+                        {techStackArr.map((t) => (
+                            <span
+                                key={t}
+                                className="rounded-full bg-gray-200 px-3 py-1 text-sm text-gray-800"
+                            >
+                                {t}
+                            </span>
+                        ))}
                     </div>
+
+                    <a
+                        href={projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-auto inline-block font-semibold text-default-600 transition hover:text-default-800"
+                    >
+                        View Project →
+                    </a>
                 </div>
-            </ScrollReveal>
-        </>
+            </div>
+        </ScrollReveal>
     );
 }
