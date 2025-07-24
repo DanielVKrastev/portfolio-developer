@@ -101,6 +101,7 @@ export default function ProjectsTable() {
                                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
                                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Tech Stack</th>
                                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">URL</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">GitHub Repo</th>
                                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
@@ -114,6 +115,11 @@ export default function ProjectsTable() {
                                     <td className="px-4 py-3 whitespace-nowrap text-sm">
                                         <a href={p.projectUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                             Link
+                                        </a>
+                                    </td>
+                                    <td className="px-4 py-3 whitespace-nowrap text-sm">
+                                        <a href={p.githubRepo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                            Repo
                                         </a>
                                     </td>
                                     <td className="px-4 py-3 whitespace-nowrap text-sm">

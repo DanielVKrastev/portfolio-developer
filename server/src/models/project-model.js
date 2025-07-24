@@ -19,6 +19,9 @@ const projectSchema = new Schema({
     },
     projectUrl: {
         type: String,
+    },
+    githubRepo: {
+        type: String,
     }
 }, {
     timestamps: true
