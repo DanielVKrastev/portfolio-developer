@@ -82,6 +82,15 @@ export function ModalProject({
                             className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
                         />
                     </div>
+                    <div>
+                        <label className="mb-1 block text-sm font-medium">GitHub Repo URL</label>
+                        <input
+                            name="githubRepo"
+                            defaultValue={form.githubRepo}
+                            onChange={handleChange}
+                            className="w-full rounded border border-gray-300 p-2 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-900"
+                        />
+                    </div>
                     <div className="flex justify-end gap-2 pt-4">
                         <button
                             type="button"
