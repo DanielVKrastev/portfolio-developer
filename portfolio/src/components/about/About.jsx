@@ -50,7 +50,7 @@ export default function About({
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <ScrollReveal><InfoBox title="Age" value={aboutMe?.age} /></ScrollReveal>
                             <ScrollReveal><InfoBox title="Location" value={aboutMe?.location} /></ScrollReveal>
-                            <ScrollReveal><InfoBox title="Email" value={aboutMe?.email} /></ScrollReveal>
+                            <ScrollReveal><a href={`mailto:${aboutMe?.email}`}><InfoBox title="Email" value={aboutMe?.email} /></a></ScrollReveal>
                             <ScrollReveal><InfoBox title="Experience" value={`${aboutMe?.experience}+ years`} /></ScrollReveal>
                         </div>
 
