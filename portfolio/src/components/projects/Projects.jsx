@@ -1,4 +1,3 @@
-import { SidebarClose } from "lucide-react";
 import ProjectCard from "./project-card/ProjectCard";
 import { ScrollReveal } from "../scroll-reveal/ScrollReveal";
 
@@ -26,6 +25,7 @@ export default function Projects({
                             description={p.description}
                             imageUrl={p.imageUrl}
                             techStack={p.techStack}
+                            githubRepo={p.githubRepo}
 
                         />)
                     )}

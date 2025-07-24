@@ -6,12 +6,13 @@ export default function ProjectCard({
     description,
     imageUrl,
     techStack,
+    githubRepo
 }) {
     const techStackArr = techStack.split(", ");
 
     return (
         <ScrollReveal>
-            <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
+            <div className="relative h-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
                 {/* Image */}
                 <img
                     src={imageUrl}
@@ -26,7 +27,7 @@ export default function ProjectCard({
                     <p className="mb-4 line-clamp-7 text-gray-600">{description}</p>
 
                     {/* Tech stack */}
-                    <div className="mb-4 flex flex-wrap gap-2">
+                    <div className="mb-8 flex flex-wrap gap-2">
                         {techStackArr.map((t) => (
                             <span
                                 key={t}
@@ -37,14 +38,26 @@ export default function ProjectCard({
                         ))}
                     </div>
 
-                    <a
-                        href={projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto inline-block font-semibold text-default-600 transition hover:text-default-800"
-                    >
-                        View Project →
-                    </a>
+                    <div className="absolute bottom-0 mb-2 m-auto">
+                        <a
+                            href={projectUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-auto inline font-semibold text-default-600 transition hover:text-default-800"
+                        >
+                            View Project →
+                        </a>
+
+                        <a
+                            href={githubRepo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-30 inline font-semibold text-default-600 transition hover:text-default-800"
+                        >
+                            GitHub Repo →
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </ScrollReveal>
