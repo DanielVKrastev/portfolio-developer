@@ -1,10 +1,10 @@
-💼 Developer Portfolio
+## 💼 Developer Portfolio
 This is my personal developer portfolio — created to showcase my skills, projects, and experience in web development.
 
-🔗 Live Demo
+## 🔗 Live Demo
 ➡️<a href="https://danielkrastev-portfolio.web.app/"> View the live portfolio </a>
 
-⚙️ Technologies Used
+## ⚙️ Technologies Used
 - React
 - Tailwind
 - Express.js
